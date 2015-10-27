@@ -1,0 +1,17 @@
+.base{
+	font-size: .8rem;
+	margin-bottom: 5px;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.floating{
+	composes: base;
+	position: absolute;
+	bottom: 15px;
+	left: 10px;
+}
+
+.checkbox{
+	composes: base;
+}

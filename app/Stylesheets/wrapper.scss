@@ -1,0 +1,28 @@
+.base{
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.main{
+	composes: base;
+	position: relative;
+	max-width: 750px;
+}
+
+.form{
+	composes: base;
+	max-width: 500px;
+	border-radius: 3px;
+	padding: 1rem;
+
+	&:not(last-of-type){
+		margin-bottom: 1.5rem;
+	}
+}
+
+.form__white{
+	composes: form;
+	background-color: white;
+}

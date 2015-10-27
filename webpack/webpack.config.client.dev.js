@@ -48,9 +48,14 @@ var config = module.exports = _.assign(_.clone(config), {
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
-        exclude: /node_modules|lib/,
+        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]',
+        exclude: /node_modules|lib/
       },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]!sass-loader',
+        exclude: /node_modules|lib/,
+      }
     ],
   },
   plugins: (config.plugins || []).concat([

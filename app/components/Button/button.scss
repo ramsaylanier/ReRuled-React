@@ -1,0 +1,105 @@
+@import "../../Stylesheets/vars";
+
+.base{
+  position: relative;
+	cursor: pointer;
+  border: 0px solid transparent;
+	border-radius: 2px;
+  font-family: $sansSerif;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: background 300ms ease-out;
+}
+
+
+.primary{
+  composes: base;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: $primary;
+
+  &:hover{
+    background-color: darken($primary, 20%);
+  }
+}
+
+.deck{
+  composes: primary;
+  &:not(last-of-type){
+    margin-right: 1rem;
+  }
+}
+
+.twitter{
+  composes: primary;
+	display: inline-block;
+  background-color: $twitter;
+
+  &:hover{
+    background-color: darken($twitter, 20%);
+  }
+
+  span{
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  svg{
+    float: left;
+    margin-right: 1rem;
+  }
+}
+
+.negative{
+  background-color: $red;
+
+  &:hover{
+    background-color: darken($red, 10%);
+  }
+}
+
+.positive{
+  background-color: $green;
+
+  &:hover{
+    background-color: darken($green, 10%);
+  }
+}
+
+.duplicate{
+  composes: base;
+  composes: deck;
+  composes: positive;
+}
+
+.delete{
+  composes: base;
+  composes: deck;
+  composes: negative;
+}
+
+.tweet{
+	margin: 1rem 0rem;
+	display: inline-block;
+	background-color: $twitter;
+	padding: .5rem 1.25rem;
+
+  svg{
+    float: left;
+  }
+
+  span{
+    float: left;
+    color: white;
+    margin-left: 1rem;
+  }
+}
+
+.application.shelf-active{
+	.floating-toggle{
+		transform: translateX(-60px);
+		transition: all 150ms ease-out;
+		opacity: 0;
+	}
+}

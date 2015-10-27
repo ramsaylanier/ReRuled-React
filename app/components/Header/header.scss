@@ -1,0 +1,10 @@
+@import '../../Stylesheets/vars';
+
+.base{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $headerHeight;
+  background-color: $dark;
+}

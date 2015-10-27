@@ -1,0 +1,96 @@
+@import "../../Stylesheets/vars";
+
+.base{
+	position: relative;
+	min-height: 100vh;
+	background-color: darken(white, 10%);
+	background-size: cover;
+	background-position: center center;
+	padding-top: $headerHeight;
+	opacity: 0;
+	transition: opacity 300ms ease-out;
+}
+
+.live{
+	composes: base;
+	height: 100vh;
+	overflow: hidden;
+
+	.hero{
+		max-height: 0vh;
+		overflow: hidden;
+		padding: 0rem;
+	}
+
+	.content{
+		height: 100%;
+		padding-top: 1.5rem;
+	}
+}
+
+
+.hero{
+	background-color: white;
+	background-size: cover;
+	background-position: center center;
+	transition: all 300ms ease-out;
+	max-height: 100vh;
+	padding: .5rem;
+}
+
+.hero__content{
+	background-color: fade-out(white, .2);
+	padding: 1rem;
+	margin: 2rem 0rem;
+}
+
+.content{
+	padding: 2rem 0rem;
+
+	@media #{$mobile}{
+		padding: 2rem .5rem 4rem .5rem;
+	}
+}
+
+.header{
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	min-height: 50vh;
+	text-align: center;
+}
+
+
+.title{
+	position: relative;
+	color: $dark;
+	font-weight: 700;
+	font-size: 2rem;
+	padding: 1rem 0rem;
+	margin-bottom: 0rem;
+}
+
+.section{
+	padding: 2rem 0rem;
+	background-color: $dark;
+	transform-origin: top center;
+
+	.section-title{
+		font-weight: 900;
+	}
+}
+
+.separator{
+	position: relative;
+	width: 100%;
+	max-width: 200px;
+	height: 2px;
+	background-color: $primary;
+	border-radius: 3px;
+	margin: 2rem auto 0rem auto;
+}
+
+.slide-down-container{
+	height: 0;
+	overflow: hidden;
+}

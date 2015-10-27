@@ -1,0 +1,161 @@
+@import '../../Stylesheets/vars';
+
+.base{
+	cursor: pointer;
+	a{
+		height: 100%;
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+
+	}
+}
+
+.floating{
+  composes: base;
+	position: fixed;
+	bottom: 10px;
+	width: 35px;
+	height: 35px;
+	padding: 5px;
+	border-radius: 50%;
+	transition: all 150ms ease-out 150ms;
+	z-index: 950;
+}
+
+.positive{
+	background-color: $green;
+
+	&:hover{
+		background-color: darken($green, 10%);
+	}
+}
+
+.negative{
+	background-color: $red;
+
+	&:hover{
+		background-color: darken($red, 10%);
+	}
+}
+
+.modal{
+  composes: floating;
+	composes: negative;
+  right: 10px;
+}
+
+.play{
+	composes: floating;
+	composes: positive;
+  left: 10px;
+}
+
+.stop{
+	composes: floating;
+	composes: negative;
+  left: 10px;
+}
+
+.close{
+	border: 0;
+	position: relative;
+	background-color: transparent;
+	text-align: right;
+	float: right;
+	z-index: 999;
+
+	@media #{$mobile}{
+		top: 0px;
+		right: -.75rem;
+	}
+}
+
+.bar{
+	position: relative;
+	background-color: black;
+	height: 2px;
+	width: 15px;
+	margin-bottom: 3px;
+}
+
+.bar1{
+	composes: bar;
+	transform: rotate(45deg);
+	top: 5px;
+}
+
+.bar2{
+	composes: bar;
+	transform: rotate(-45deg);
+}
+
+.bar3{
+	composes: bar;
+	display: none;
+}
+
+.edit{
+	border: 0;
+	background-color: transparent;
+
+	&:hover, &:focus, &:active{
+		outline: none;
+
+		.dot{
+			background-color: $primary;
+
+			&:before, &:after{
+				background-color: $primary;
+			}
+
+			&:before{
+				transform: translateX(-2px);
+			}
+
+			&:after{
+				transform: translateX(2px);
+			}
+		}
+	}
+}
+
+$dotSize: 5px;
+
+.dots{
+	position: absolute;
+	bottom: $dotSize * 2.5;
+	right: $dotSize * 4;
+	width: $dotSize * 5;
+	padding: 5px;
+}
+
+.dot{
+	position: relative;
+	display: block;
+	width: $dotSize;
+	height: $dotSize;
+	border-radius: 50%;
+	background-color: $dark;
+	transform: translateX($dotSize * 2);
+	transition: background 200ms ease-out;
+
+	&:before, &:after{
+		content: '';
+		position: absolute;
+		width: $dotSize;
+		height: $dotSize;
+		background-color: $dark;
+		border-radius: 50%;
+		transition: all 200ms ease-out;
+	}
+
+	&:before{
+		left: -$dotSize * 2;
+	}
+
+	&:after{
+		right: -$dotSize * 2;
+	}
+}

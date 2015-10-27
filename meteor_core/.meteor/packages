@@ -22,3 +22,6 @@ ejson
 spacebars
 check
 mindfront:why-reminify
+service-configuration
+kadira:flow-router
+reactive-var

@@ -1,0 +1,29 @@
+@import "../../Stylesheets/vars";
+
+.container{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.base{
+	color: white;
+	padding: 1rem .5rem;
+
+	&:not(:last-of-type){
+		border-width: 0px 0px 3px 0px;
+	}
+}
+
+.error{
+	composes: base;
+	background-color: $red;
+	border-color: $red;
+}
+
+.success{
+	composes: base;
+	background-color: $red;
+	border-color: $red;
+}
