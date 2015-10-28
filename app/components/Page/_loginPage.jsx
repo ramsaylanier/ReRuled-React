@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 
 //components
 import { Page, PageContent } from '../Page/page.jsx';
@@ -20,7 +20,7 @@ const LoginPage = React.createClass({
 		let wrapperClassName = wrapperStlyes.form__white;
 
 		return (
-			<Page backgroundImage={'/img/login-bg.jpg'}>
+			<Page>
 				<PageContent>
 					<div className={wrapperClassName}>
 						<Form attributes={loginForm}/>
@@ -40,7 +40,7 @@ let renderForgotPasswordForm = (e)=>{
 
 	$('.page .wrapper').append('<div id="forgot-password-form-wrapper"></div>');
 
-	ReactDOM.render(
+	render(
 		<div>
 			<Form attributes={forgotPasswordForm} />
 		</div>,
@@ -58,7 +58,7 @@ let twitterLogin = ()=>{
 			Alerts.throw(error, 'error');
 		}
 		else{
-			FlowRouter.go('/' + Meteor.user().username);
+			FlowRouter.go('/dashboard');
 		}
 	});
 };

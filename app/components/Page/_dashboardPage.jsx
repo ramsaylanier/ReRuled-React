@@ -19,7 +19,7 @@ const DashboardPage = React.createClass({
 
 		return {
 			loading: !subscription.ready(),
-			decks: Decks.find({}, {sort: {createdOn: -1}}).fetch()
+			decks: {}
 		};
 	},
 

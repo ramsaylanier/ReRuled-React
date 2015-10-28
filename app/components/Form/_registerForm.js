@@ -1,4 +1,6 @@
-import Alerts from '../Alerts/alert.jsx';
+import { Alerts } from '../Alerts/alert.jsx';
+import AnimateItem from '../../animations.js';
+import PageAnimations from '../Page/PageAnimations.js';
 
 let registerForm = {
 	fields: [
@@ -8,7 +10,8 @@ let registerForm = {
 		{type: 'password', label:"confirm-password", name: 'confirm-password', className:['field','full']},
 		{type: 'submit', value: 'Register', className: ['submit','full']}
 	],
-	className: 'login-form',
+	type: 'login-form',
+	animateIn: false,
 	onSubmit: function(e){
 		e.preventDefault();
 
@@ -43,8 +46,7 @@ let registerForm = {
 				}
 				else {
 					Meteor.setTimeout(function(){
-						Session.set('loggedIn', true);
-						FlowRouter.go('/');
+						FlowRouter.go('/dashboard');
 					}, 500);
 				}
 			})

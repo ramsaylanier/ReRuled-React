@@ -6,14 +6,14 @@ import MainLayout from './components/Layouts/MainLayout.jsx';
 
 
 //PAGES
-import { LoginPage, RegisterPage, NotFoundPage } from './components/Page/Pages.js';
+import * as Page from './components/Page/Pages.js';
 
 FlowRouter.route('/', {
 	triggersEnter: [function(context, redirect){
 		if (!Meteor.user()){
 			redirect('/login');
 		} else (
-			redirect('/' + Meteor.user().username)
+			redirect('/dashboard')
 		)
 	}]
 });
@@ -26,7 +26,7 @@ FlowRouter.route('/login', {
 	}],
 	action: function(){
 		ReactDOM.render(
-			<MainLayout content={<LoginPage/>}/>,
+			<MainLayout content={<Page.LoginPage/>}/>,
 			document.getElementById('react-root')
 		)
 	}
@@ -35,7 +35,16 @@ FlowRouter.route('/login', {
 FlowRouter.route('/register', {
 	action: function(){
 		ReactDOM.render(
-			<MainLayout content={<RegisterPage/>}/>,
+			<MainLayout content={<Page.RegisterPage/>}/>,
+			document.getElementById('react-root')
+		)
+	}
+})
+
+FlowRouter.route('/dashboard', {
+	action: function(){
+		ReactDOM.render(
+			<MainLayout content={<Page.DashboardPage/>}/>,
 			document.getElementById('react-root')
 		)
 	}

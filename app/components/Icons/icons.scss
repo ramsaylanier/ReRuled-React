@@ -27,13 +27,6 @@
 
 .logo{
   height: 100%;
-  .darkP{
-  	fill: darken($primaryDark, 20%);
-  }
-
-  .lightP{
-  	fill: $primary;
-  }
 }
 
 .delete{

@@ -47,6 +47,10 @@ var config = module.exports = _.assign(_.clone(config), {
         },
       },
       {
+        test: /\.cjsx$/,
+        loaders: ['coffee', 'cjsx']
+      },
+      {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]',
         exclude: /node_modules|lib/

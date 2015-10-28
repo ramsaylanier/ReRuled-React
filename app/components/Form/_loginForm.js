@@ -34,7 +34,7 @@ let loginForm = {
 				AnimateItem($('.page'), PageAnimations.animateOut)
 
 				Meteor.setTimeout(function(){
-					FlowRouter.go('/' + userName);
+					FlowRouter.go('/dashboard');
 				}, 500);
 			}
 		})

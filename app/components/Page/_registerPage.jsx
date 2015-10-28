@@ -17,10 +17,10 @@ const RegisterPage = React.createClass({
     let wrapperClassName = wrapperStlyes.form__white;
 
 		return(
-			<Page backgroundImage={'/img/login-bg.jpg'}>
+			<Page>
         <PageContent>
   				<div className={wrapperClassName}>
-  					<Form attributes={registerFormAttributes} />
+  					<Form attributes={registerForm} />
   				</div>
         </PageContent>
 			</Page>
