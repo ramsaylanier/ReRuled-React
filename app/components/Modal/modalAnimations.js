@@ -14,12 +14,6 @@ export function animateModalOut(){
     right: -window.innerWidth,
     ease: Power2.easeOut
   });
-
-  Meteor.setTimeout(() => {
-    this.props.actions.setCurrentModal(null);
-    $('.modal__base').remove();
-    $('body').removeClass('modal-active');
-  }, 500);
 }
 
 export function animateModalIn(){
@@ -37,6 +31,4 @@ export function animateModalIn(){
     right: 0,
     ease: Power2.easeOut
   });
-
-  $('body').addClass('modal-active');
 }

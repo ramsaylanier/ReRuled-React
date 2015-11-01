@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './form.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
+import { animateModalOut } from '../Modal/modalAnimations.js';
 
 let attributes = {
   fields: [
@@ -23,6 +24,7 @@ const CreateRuleForm = React.createClass({
 
   _onSubmit(e){
     e.preventDefault();
+    let setCurrentModal = this.props.actions.setCurrentModal;
 
     var rule = {
       name: $(e.target).find('[name="rule-name"]').val(),
@@ -41,8 +43,10 @@ const CreateRuleForm = React.createClass({
         if (err){
           Alerts.throw(err.reasons, 'error')
         } else {
-          console.log($('.toggle__close'))
-          $('.toggle__close').click();
+          animateModalOut();
+          setTimeout( () => {
+            setCurrentModal(null);
+          }, 500);
         }
       })
     )

@@ -21,10 +21,3 @@ export function setCurrentModal(modalName){
     modalName
   }
 }
-
-export function setCurrentModalRef(modalRef){
-  return{
-    type: types.SET_CURRENT_MODAL_REF,
-    modalRef
-  }
-}

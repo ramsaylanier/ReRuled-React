@@ -9,7 +9,6 @@ export default class RulesList extends Component{
   render(){
 
     let rules = this.props.rules;
-    console.log('rules:', rules);
 
     return(
       <div className={styles.container}>

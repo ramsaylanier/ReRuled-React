@@ -7,6 +7,7 @@ import Button from './button.jsx';
 const CreateRuleButton = React.createClass({
 
   handleClick(){
+    console.log(this.props);
     this.props.actions.setCurrentModal(<CreateRuleModal/>);
   },
 

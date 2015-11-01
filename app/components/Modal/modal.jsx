@@ -9,10 +9,7 @@ import { animateModalIn, animateModalOut } from './modalAnimations.js';
 const Modal = React.createClass({
 
 	componentDidMount(){
-		this.props.actions.setCurrentModalRef(this.refs.modal);
 		animateModalIn();
-
-		console.log(this.props);
 	},
 
 	render(){
@@ -36,7 +33,7 @@ const Modal = React.createClass({
 
 	_animateModalOut(){
 		animateModalOut();
-		Meteor.setTimeout( () => {
+		setTimeout( () => {
 			this.props.actions.setCurrentModal(null);
 		}, 500)
 	}

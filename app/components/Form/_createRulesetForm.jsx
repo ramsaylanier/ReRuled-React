@@ -2,6 +2,8 @@ import React from 'react';
 import Form from './form.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
+import { animateModalOut } from '../Modal/modalAnimations.js';
+
 
 let attributes = {
   fields: [
@@ -24,7 +26,6 @@ const CreateRulesetForm = React.createClass({
     e.preventDefault();
     let setCurrentModal = this.props.actions.setCurrentModal;
 
-
     var ruleset = {
       name: $(e.target).find('[name="ruleset-name"]').val(),
       game: this.props.currentGame
@@ -38,9 +39,10 @@ const CreateRulesetForm = React.createClass({
         if (err){
           Alerts.throw(err.reason, 'error')
         } else {
-          $('.modal__base').remove();
-          $('body').removeClass('modal-active');
-          setCurrentModal(null);
+          animateModalOut();
+          setTimeout( () => {
+            setCurrentModal(null);
+          }, 500)
         }
       })
     )
