@@ -1,4 +1,4 @@
-import { SET_CURRENT_MODAL } from '../constants/actionTypes.js';
+import { SET_CURRENT_MODAL, SET_CURRENT_MODAL_REF } from '../constants/actionTypes.js';
 
 
 let initialState = {
@@ -11,6 +11,10 @@ export default function ui(state = initialState, action){
       return Object.assign({}, state, {
           currentModal: action.modalName
         })
+    case SET_CURRENT_MODAL_REF:
+      return Object.assign({}, state, {
+        currentModalRef: action.modalRef
+      })
     default:
       return state;
   }

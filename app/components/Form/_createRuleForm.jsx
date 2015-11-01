@@ -27,7 +27,7 @@ const CreateRuleForm = React.createClass({
     var rule = {
       name: $(e.target).find('[name="rule-name"]').val(),
       description: $(e.target).find('[name="rule-description"]').val(),
-      gameId: this.props.currentGame
+      game: this.props.currentGame
     }
 
     if (!rule.name)
@@ -41,7 +41,8 @@ const CreateRuleForm = React.createClass({
         if (err){
           Alerts.throw(err.reasons, 'error')
         } else {
-
+          console.log($('.toggle__close'))
+          $('.toggle__close').click();
         }
       })
     )

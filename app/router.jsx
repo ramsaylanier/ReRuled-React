@@ -50,4 +50,13 @@ FlowRouter.route('/dashboard', {
 	}
 })
 
+FlowRouter.route('/dashboard/:gameId', {
+	action: function(){
+		ReactDOM.render(
+			<Root view=<Page.DashboardPage />/>,
+			document.getElementById('react-root')
+		)
+	}
+})
+
 FlowRouter.initialize();

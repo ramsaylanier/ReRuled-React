@@ -11,7 +11,6 @@ import "./app.scss";
 
    constructor(props){
      super();
-
      this._currentModal = this._currentModal.bind(this);
    }
 
@@ -54,7 +53,8 @@ function mapStateToProps(state) {
   return {
     currentGame: state.games.currentGame,
     rules: state.rules.rules,
-    currentModal: state.ui.currentModal
+    currentModal: state.ui.currentModal,
+    currentModalRef: state.ui.currentModalRef
   }
 }
 

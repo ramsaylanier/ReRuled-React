@@ -1,0 +1,31 @@
+@import '../../Stylesheets/vars.scss';
+
+.container{
+  flex: 1;
+
+  &:not(:last-of-type){
+    margin-right: 1rem;
+  }
+}
+
+.heading{
+  font-weight: 900;
+}
+
+.title{
+  font-family: $sansSerif;
+  color: $primary;
+}
+
+.item{
+  padding: .5rem;
+  background-color: darken(white, 5%);
+
+  &:not(:last-of-type){
+    margin-bottom: .5rem;
+  }
+}
+
+.description{
+  margin: 0;
+}

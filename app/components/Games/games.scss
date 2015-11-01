@@ -1,7 +1,17 @@
 @import '../../Stylesheets/vars.scss';
 
+.main{
+  display: flex;
+}
+
+.header{
+  margin-bottom: 2rem;
+}
+
 .search{
   position: relative;
+  display: inline-block;
+  margin-right: 1rem;
 }
 
 .field{
@@ -36,5 +46,14 @@
 
   &:not(:last-of-type){
     margin-bottom: .5rem;
+  }
+}
+
+.actions{
+  display: inline-block;
+  button{
+    &:not(:last-of-type){
+      margin-right: 1rem;
+    }
   }
 }

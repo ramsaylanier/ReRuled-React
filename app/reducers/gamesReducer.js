@@ -1,4 +1,4 @@
-import { SELECT_GAME } from '../constants/actionTypes.js';
+import { SET_CURRENT_GAME } from '../constants/actionTypes.js';
 
 
 let initialState = {
@@ -7,11 +7,9 @@ let initialState = {
 
 export default function games(state = initialState, action){
   switch(action.type){
-    case SELECT_GAME:
-      console.log('state:', state);
-      console.log(action.gameId);
+    case SET_CURRENT_GAME:
       return Object.assign({}, state, {
-          currentGame: action.gameId
+          currentGame: action.gameName
         })
     default:
       return state;

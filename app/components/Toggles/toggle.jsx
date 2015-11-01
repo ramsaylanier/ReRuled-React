@@ -6,10 +6,16 @@ const Toggle = React.createClass({
 	render: function(){
 		let className = styles[this.props.type] || styles.modal;
 		return (
-			<a className={className} onClick={this.props.action}>
+			<a className={className} onClick={this._onClick}>
 				{this._type()}
 			</a>
 		)
+	},
+
+	_onClick(){
+		console.log('click');
+
+		return this.props.action();
 	},
 
 	_type(){

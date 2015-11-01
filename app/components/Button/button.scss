@@ -24,6 +24,18 @@
   }
 }
 
+.secondary{
+  composes: base;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background-color: $secondary;
+
+  &:hover{
+    background-color: darken($secondary, 20%);
+  }
+}
+
 .twitter{
   composes: primary;
 	display: inline-block;

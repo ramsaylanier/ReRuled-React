@@ -12,7 +12,7 @@ const CreateRuleButton = React.createClass({
 
   render(){
     return(
-      <Button action={this.handleClick} type={styles.primary}>Create New Rule</Button>
+      <Button action={this.handleClick} type='primary'>Create New Rule</Button>
     )
   }
 })

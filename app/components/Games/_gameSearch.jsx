@@ -14,6 +14,12 @@ export default class GameSearch extends Component{
     }
   }
 
+  componentDidMount(){
+    let queryParams = FlowRouter.getQueryParam('game');
+    this.props.actions.setCurrentGame(queryParams);
+    $('[name=game-search-field]').val(queryParams)
+  }
+
   render(){
 
     return (
@@ -64,9 +70,11 @@ export default class GameSearch extends Component{
   _itemOnClick(e){
     let field = $(ReactDOM.findDOMNode(this.refs.field));
     let gameId = $(e.currentTarget).data('game-id');
-    field.val($(e.currentTarget).text());
+    let gameName = $(e.currentTarget).text();
+    field.val(gameName);
     this.setState({ games: {} })
-    this.props.actions.selectGame(gameId);
+    this.props.actions.setCurrentGame(gameName);
+    FlowRouter.setQueryParams({'game':gameName});
   }
 
 }

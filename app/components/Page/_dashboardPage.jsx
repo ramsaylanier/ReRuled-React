@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 import { Page, PageContent } from '../Page/page.jsx';
 import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
+import GameActions from '../Games/_gameActions.jsx';
+import RulesList from '../Rules/_rulesList.jsx';
+import RulesetsList from '../Rules/_rulesetsList.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
-import CreateRuleButton from '../Button/_CreateRuleButton.jsx';
 
 //styles
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
+import gameStyles from '../Games/games.scss';
 
 
 const DashboardPage = React.createClass({
@@ -18,11 +21,13 @@ const DashboardPage = React.createClass({
 		let currentGame = this.props.currentGame;
 		let gameSub = Meteor.subscribe('gameList');
 		let rulesSub = Meteor.subscribe('rulesListByGameId', currentGame)
+		let rulesetsSub = Meteor.subscribe('rulesetsListByGameId', currentGame)
 
 		return {
-			loading: !rulesSub.ready(),
+			loading: !rulesSub.ready() || !gameSub.ready() || !rulesetsSub.ready(),
 			games: Games.find().fetch(),
-			rules: Rules.find({gameId: currentGame}).fetch()
+			rules: Rules.find({game: currentGame}).fetch(),
+			rulesets: Rulesets.find({game: currentGame}).fetch()
 		}
 	},
 
@@ -30,26 +35,27 @@ const DashboardPage = React.createClass({
 
 		let games = this.data.games;
 		let rules = this.data.rules;
+		let rulesets = this.data.rulesets;
 		let currentGame = this.props.currentGame;
 
 		return (
 			<div className={wrapperStyles.page}>
 				<Page>
 					<PageContent>
-						<GameSearch games={games} actions={this.props.actions}/>
+						<header className={gameStyles.header}>
+							<GameSearch games={games} actions={this.props.actions}/>
+
+							{currentGame &&
+								<GameActions {...this.props} />
+							}
+						</header>
 
 						{currentGame &&
-
-
-							<div>
-								<CreateRuleButton actions={this.props.actions}/>
-
+							<div className={gameStyles.main}>
+								<RulesList rules={this.data.rules}/>
+								<RulesetsList rulesets={this.data.rulesets}/>
 							</div>
 						}
-
-						{this._showRules()}
-
-
 					</PageContent>
 				</Page>
 			</div>
@@ -67,26 +73,6 @@ const DashboardPage = React.createClass({
 				Alerts.throw('Rule Addedd!', 'success')
 			}
 		})
-	},
-
-	_showRules(){
-
-		let rules = this.data.rules;
-		if (rules){
-			return(
-				<div>
-					<h3>Rules:</h3>
-						{rules.map( rule => {
-							return(
-								<div className="rule">
-									<h5>{rule.name}</h5>
-									<p>{rule.gameId}</p>
-								</div>
-							)
-						})}
-				</div>
-			)
-		}
 	}
 });
 

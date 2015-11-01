@@ -1,9 +1,9 @@
 import * as types from '../constants/actionTypes.js';
 
-export function selectGame(gameId){
+export function setCurrentGame(gameName){
   return{
-    type: types.SELECT_GAME,
-    gameId
+    type: types.SET_CURRENT_GAME,
+    gameName
   }
 }
 
@@ -19,5 +19,12 @@ export function setCurrentModal(modalName){
   return{
     type: types.SET_CURRENT_MODAL,
     modalName
+  }
+}
+
+export function setCurrentModalRef(modalRef){
+  return{
+    type: types.SET_CURRENT_MODAL_REF,
+    modalRef
   }
 }
