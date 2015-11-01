@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 //components
 import { Page, PageContent } from '../Page/page.jsx';
 import NotFoundPage from '../Page/_notFoundPage.jsx';
-import GameSelect from '../Games/_gameSelect.jsx';
+import GameSearch from '../Games/_gameSearch.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 import CreateRuleButton from '../Button/_CreateRuleButton.jsx';
 
@@ -36,7 +36,7 @@ const DashboardPage = React.createClass({
 			<div className={wrapperStyles.page}>
 				<Page>
 					<PageContent>
-						<GameSelect games={games} actions={this.props.actions}/>
+						<GameSearch games={games} actions={this.props.actions}/>
 
 						{currentGame &&
 

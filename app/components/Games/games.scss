@@ -1,0 +1,40 @@
+@import '../../Stylesheets/vars.scss';
+
+.search{
+  position: relative;
+}
+
+.field{
+  padding: .5rem;
+  border: 0;
+  font-size: .9rem;
+  border-radius: 2px;
+
+  &:focus, &:active{
+    outline: none;
+  }
+}
+
+.found{
+  position: absolute;
+  top: 2.5rem;
+  background-color: white;
+  padding: .5rem;
+  border-radius: 2px;
+  border: 1px solid $primary;
+}
+
+.list{
+  max-width: 500px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.item{
+  padding: .5rem;
+  background-color: darken(white, 5%);
+
+  &:not(:last-of-type){
+    margin-bottom: .5rem;
+  }
+}

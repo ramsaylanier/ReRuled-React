@@ -10,7 +10,7 @@ const Form = React.createClass({
 		let fields = this.props.attributes.fields;
 		let className = this.props.attributes.className ? styles[this.props.attributes.className] : styles.base;
 		return(
-			<form {...this.props.attributes} className={className} >
+			<form {...this.props} className={className} >
 				{fields.map( field => {
 					return <InputType key={field.id} {...field}/>
 				})}

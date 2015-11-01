@@ -3,8 +3,8 @@ Games = new Mongo.Collection('games');
 
 
 Meteor.methods({
-  createRule: function(name, gameId){
-    var ruleId = Rules.insert({name: name, gameId: gameId});
+  createRule: function(rule){
+    var ruleId = Rules.insert(rule);
     return ruleId;
   }
 })

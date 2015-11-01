@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './button.scss';
 
-import AddRuleModal from '../Modal/_AddRuleModal.jsx';
+import CreateRuleModal from '../Modal/_createRuleModal.jsx';
 import Button from './button.jsx';
 
 const CreateRuleButton = React.createClass({
 
   handleClick(){
-    console.log(this.props);
-    this.props.actions.setCurrentModal(<AddRuleModal/>);
+    this.props.actions.setCurrentModal(<CreateRuleModal/>);
   },
 
   render(){
