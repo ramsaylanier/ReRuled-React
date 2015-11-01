@@ -8,10 +8,10 @@ Meteor.startup(() => {
 
 	var loginStyle = "popup";
 
-	Meteor.call('serviceConfig', loginStyle, function(error){
-		if (error)
-			Errors.throw(error.reason, 'error')
-	});
+	// Meteor.call('serviceConfig', loginStyle, function(error){
+	// 	if (error)
+	// 		Errors.throw(error.reason, 'error')
+	// });
 
 	// Meteor.subscribe('userProfile');
 

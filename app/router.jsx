@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reactMixin from 'react-mixin';
 
-import MainLayout from './components/Layouts/MainLayout.jsx';
-
+import Root from './index.jsx';
+import App from './containers/app.jsx';
 
 //PAGES
 import * as Page from './components/Page/Pages.js';
@@ -26,7 +26,7 @@ FlowRouter.route('/login', {
 	}],
 	action: function(){
 		ReactDOM.render(
-			<MainLayout content={<Page.LoginPage/>}/>,
+			<Root view={<Page.LoginPage/>}/>,
 			document.getElementById('react-root')
 		)
 	}
@@ -35,7 +35,7 @@ FlowRouter.route('/login', {
 FlowRouter.route('/register', {
 	action: function(){
 		ReactDOM.render(
-			<MainLayout content={<Page.RegisterPage/>}/>,
+			<Root view={<Page.RegisterPage/>}/>,
 			document.getElementById('react-root')
 		)
 	}
@@ -44,7 +44,7 @@ FlowRouter.route('/register', {
 FlowRouter.route('/dashboard', {
 	action: function(){
 		ReactDOM.render(
-			<MainLayout content={<Page.DashboardPage/>}/>,
+			<Root view=<Page.DashboardPage />/>,
 			document.getElementById('react-root')
 		)
 	}

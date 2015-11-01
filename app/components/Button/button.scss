@@ -24,13 +24,6 @@
   }
 }
 
-.deck{
-  composes: primary;
-  &:not(last-of-type){
-    margin-right: 1rem;
-  }
-}
-
 .twitter{
   composes: primary;
 	display: inline-block;
@@ -65,18 +58,6 @@
   &:hover{
     background-color: darken($green, 10%);
   }
-}
-
-.duplicate{
-  composes: base;
-  composes: deck;
-  composes: positive;
-}
-
-.delete{
-  composes: base;
-  composes: deck;
-  composes: negative;
 }
 
 .tweet{
