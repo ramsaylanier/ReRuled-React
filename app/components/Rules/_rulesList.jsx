@@ -17,7 +17,7 @@ export default class RulesList extends Component{
           <ul className={styles.list}>
             {rules.map( rule => {
               return(
-                <RuleItem rule={rule}/>
+                <RuleItem rule={rule} {...this.props}/>
               )
             })}
           </ul>

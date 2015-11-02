@@ -26,20 +26,18 @@ const CreateRuleForm = React.createClass({
     e.preventDefault();
     let setCurrentModal = this.props.actions.setCurrentModal;
 
-    var rule = {
-      name: $(e.target).find('[name="rule-name"]').val(),
-      description: $(e.target).find('[name="rule-description"]').val(),
-      game: this.props.currentGame
-    }
+    let name = $(e.target).find('[name="rule-name"]').val();
+    let description = $(e.target).find('[name="rule-description"]').val();
+    let game = this.props.currentGame;
 
-    if (!rule.name)
+    if (!name)
       Alerts.throw("Please enter a name for your rule.", 'error');
 
-    else if (!rule.description)
+    else if (!description)
       Alerts.throw("Please enter a description for your rule.", 'error');
 
     else (
-      Meteor.call('createRule', rule, function(err, res){
+      Meteor.call('createRule', name, description, game, function(err, res){
         if (err){
           Alerts.throw(err.reasons, 'error')
         } else {

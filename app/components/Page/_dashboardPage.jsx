@@ -58,8 +58,8 @@ const DashboardPage = React.createClass({
 
 						{currentGame &&
 							<div className={gameStyles.main}>
-								<RulesList rules={this.data.rules}/>
-								<RulesetsList rulesets={this.data.rulesets}/>
+								<RulesList rules={this.data.rules} actions={this.props.actions}/>
+								<RulesetsList rulesets={this.data.rulesets} actions={this.props.actions}/>
 							</div>
 						}
 					</PageContent>

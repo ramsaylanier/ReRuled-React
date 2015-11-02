@@ -5,6 +5,11 @@
 	pointer-events: none;
 }
 
+.block{
+	composes: base;
+	display: block;
+}
+
 .floating{
 	composes: base;
 	position: absolute;

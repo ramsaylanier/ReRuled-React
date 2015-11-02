@@ -10,7 +10,6 @@ const InputType = React.createClass({
 	},
 
 	componentDidMount(){
-		console.log(this.props);
 		let input = $(ReactDOM.findDOMNode(this.refs.input));
 		let label = $(ReactDOM.findDOMNode(this.refs.label));
 
@@ -26,10 +25,6 @@ const InputType = React.createClass({
 		if (this.props.type == 'checkbox'){
 			this.setState({checked: e.target.checked})
 		} else {
-			console.log(this.props);
-			if( this.props.onChange){
-				this.props.onChange(e);
-			}
 			this.setState({value: e.target.value});
 		}
 	},

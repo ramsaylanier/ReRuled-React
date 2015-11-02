@@ -14,7 +14,13 @@
 
 .title{
   font-family: $sansSerif;
+  font-weight: 900;
   color: $primary;
+  margin-bottom: .5rem;
+
+  a{
+    color: $primary;
+  }
 }
 
 .item{
@@ -26,6 +32,19 @@
   }
 }
 
+.meta{
+
+}
+
+.creator{
+  font-size: .7rem;
+}
+
 .description{
   margin: 0;
+  line-height: 1.5rem;
+}
+
+.rulesets{
+  margin: 1.5rem 0rem;
 }

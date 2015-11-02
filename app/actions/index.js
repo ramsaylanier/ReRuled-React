@@ -15,6 +15,13 @@ export function addRuleToRuleset(ruleId, rulesetId){
   }
 }
 
+export function setCurrentRule(rule){
+  return{
+    type: types.SET_CURRENT_RULE,
+    rule
+  }
+}
+
 export function setCurrentModal(modalName){
   return{
     type: types.SET_CURRENT_MODAL,

@@ -14,13 +14,14 @@ export default class RulesetsList extends Component{
     let rulesets = this.props.rulesets;
     let heading = this.props.public ? "Public Rulesets:" : "Your Rulesets:";
 
+    console.log(this.props);
     return(
       <div className={styles.container}>
         <h5 className={styles.heading}>{heading}</h5>
           <ul className={styles.list}>
             {rulesets.map( ruleset => {
               return(
-                <RulesetItem ruleset={ruleset}/>
+                <RulesetItem ruleset={ruleset} {...this.props}/>
               )
             })}
           </ul>
