@@ -15,7 +15,7 @@ const Header = React.createClass({
 	},
 
 	render(){
-		let logoLink = Meteor.user() ? "/" + Meteor.user().username : '/login';
+		let logoLink = Meteor.user() ? "/dashboard" : '/login';
 		let className = styles.base;
 		let wrapperClassName = wrapperSrtles.main;
 

@@ -1,22 +1,5 @@
 @import '../../Stylesheets/vars.scss';
 
-.main{
-  display: flex;
-}
-
-.link{
-  padding: 1rem 0rem;
-  color: $primary;
-  text-decoration: underline;
-  a{
-    color: $primary;
-  }
-}
-
-.header{
-  margin-bottom: 2rem;
-}
-
 .search{
   position: relative;
   display: inline-block;
@@ -57,14 +40,5 @@
 
   &:not(:last-of-type){
     margin-bottom: .5rem;
-  }
-}
-
-.actions{
-  display: inline-block;
-  button{
-    &:not(:last-of-type){
-      margin-right: 1rem;
-    }
   }
 }

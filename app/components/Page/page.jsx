@@ -4,7 +4,7 @@ import reactMixin from 'react-mixin';
 
 import Settings from '../../settings.js';
 import PageAnimations from './PageAnimations.js';
-import AnimateItem from '../../animations.js'
+import { AnimateItem, resetCounts } from '../../animations.js'
 
 import styles from './page.scss';
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
@@ -13,6 +13,7 @@ import wrapperStyles from '../../Stylesheets/wrapper.scss';
 const Page = React.createClass({
 
 	componentDidMount(){
+		resetCounts();
 		CurrentPageRef = this.refs.page;
 
 		if (Settings.AnimatePages){

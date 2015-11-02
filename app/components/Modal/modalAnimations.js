@@ -20,7 +20,8 @@ export function animateModalIn(){
   let page = $(ReactDOM.findDOMNode(CurrentPageRef));
   let modal = $('.modal__base');
 
-  let dX = modal.outerWidth() - ( (window.innerWidth - $('.wrapper__main').outerWidth()) / 2)
+  // let dX = modal.outerWidth() - ( (window.innerWidth - $('.wrapper__main').outerWidth()) )
+  let dX = window.innerWidth / 4;
 
   TweenMax.to(page, .4, {
     x: -dX,

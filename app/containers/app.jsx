@@ -53,6 +53,7 @@ function mapStateToProps(state) {
   return {
     currentGame: state.games.currentGame,
     rules: state.rules.rules,
+    ruleCount: state.rules.ruleCount,
     currentModal: state.ui.currentModal
   }
 }

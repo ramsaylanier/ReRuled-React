@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Label from './label';
 import styles from './form.scss';
+import autocompleteStyles from './autocomplete.scss'
 
-const InputType = React.createClass({
+const AutocompleteField = React.createClass({
 
 	getInitialState(){
-		return {value: this.props.value, checked: this.props.checked}
+		return {value: this.props.value, found: {}}
 	},
 
 	componentDidMount(){
-		console.log(this.props);
 		let input = $(ReactDOM.findDOMNode(this.refs.input));
 		let label = $(ReactDOM.findDOMNode(this.refs.label));
 
@@ -23,15 +23,24 @@ const InputType = React.createClass({
 
 	handleChange(e){
 		this.activateField(e);
-		if (this.props.type == 'checkbox'){
-			this.setState({checked: e.target.checked})
-		} else {
-			console.log(this.props);
-			if( this.props.onChange){
-				this.props.onChange(e);
-			}
-			this.setState({value: e.target.value});
-		}
+		this.setState({value: e.target.value});
+
+    let items = this.props.items;
+    let fieldKey = this.props.fieldKey;
+    let searchString = $(e.currentTarget).val().toLowerCase();
+    let foundItems = [];
+
+    if (!searchString){
+      this.setState({ found: {} })
+    } else {
+      _.each(items, item => {
+        let key = item[fieldKey].toLowerCase();
+        if (key.indexOf(searchString) !== -1){
+          foundItems.push(item)
+          this.setState({found: foundItems})
+        }
+      })
+    }
 	},
 
 	activateField(e){
@@ -60,13 +69,17 @@ const InputType = React.createClass({
 		}
 	},
 
+	keyDown(e){
+		if (e.keyCode == 13){
+			$('.autocomplete__item').first().click();
+		}
+	},
+
 	render(){
 		let hasLabel = this.props.label;
-		let isTextArea = this.props.type === 'textarea';
-		let isRange = this.props.type === 'range';
 		let value = this.state.value;
 		let controlClassName = styles.control;
-		let inputClassNames = [styles[this.props.type]];
+		let inputClassNames = [styles['text']];
 		let onChange = this.props.onChange || this.handleChange;
 
 		_.each(this.props.className, function(className){
@@ -77,25 +90,18 @@ const InputType = React.createClass({
 			<div className={controlClassName} ref="formControl">
 					{this._label()}
 
-					{isTextArea ?
-						<textarea ref="input" {...this.props} className={inputClassNames.join(' ')} value={value} onChange={onChange}>
-							{value}
-						</textarea> :
-						<input ref="input"
+					<input ref="input"
 							{...this.props}
 							className={inputClassNames.join(' ')}
 							value={value}
-							checked={this.state.checked}
+							onKeyDown={this.keyDown}
 							onFocus={this.activateField}
 							onBlur={this.deactivateField}
 							onChange={this.handleChange} />
-					}
-
-					{isRange &&
-						<output>{value || this.props.max / 2}</output>
-					}
 
 					{this._overlay()}
+
+					{this._showFoundItems()}
 			</div>
 		)
 	},
@@ -117,7 +123,34 @@ const InputType = React.createClass({
 				<span className={overlayClassName}></span>
 			)
 		}
-	}
+	},
+
+	_itemClick(e){
+		this.setState({
+			found: {},
+			value: $(e.currentTarget).text()
+		})
+		this.props.itemClick(e);
+	},
+
+	_showFoundItems(){
+    let items = this.state.found;
+		let onClick = this.props.itemClick;
+
+    if (items.length > 0){
+      return(
+        <div className={autocompleteStyles.found}>
+          <ul className={autocompleteStyles.list}>
+            {items.map(item => {
+              return(
+                <li data-game-id={item._id} className={autocompleteStyles.item} onClick={this._itemClick}>{item.title}</li>
+              )
+            })}
+          </ul>
+        </div>
+      )
+    }
+  },
 });
 
-export default InputType;
+export default AutocompleteField;

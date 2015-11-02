@@ -50,10 +50,10 @@ FlowRouter.route('/dashboard', {
 	}
 })
 
-FlowRouter.route('/dashboard/:gameId', {
+FlowRouter.route('/games/:game', {
 	action: function(){
 		ReactDOM.render(
-			<Root view=<Page.DashboardPage />/>,
+			<Root view=<Page.GamePage />/>,
 			document.getElementById('react-root')
 		)
 	}

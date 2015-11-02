@@ -14,58 +14,57 @@ import wrapperStyles from '../../Stylesheets/wrapper.scss';
 import gameStyles from '../Games/games.scss';
 
 
-const DashboardPage = React.createClass({
+const GamePage = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData(){
-		let currentGame = this.props.currentGame;
-		let gameSub = Meteor.subscribe('gameList');
+		let currentGame = FlowRouter.getParam('game');
+		let gameSub = Meteor.subscribe('currentGame', currentGame);
 		let rulesSub = Meteor.subscribe('rulesListByGameId', currentGame)
 		let rulesetsSub = Meteor.subscribe('rulesetsListByGameId', currentGame)
 
 		return {
 			loading: !rulesSub.ready() || !gameSub.ready() || !rulesetsSub.ready(),
-			games: Games.find().fetch(),
+			game: Games.findOne({title: currentGame}),
 			rules: Rules.find({game: currentGame}).fetch(),
 			rulesets: Rulesets.find({game: currentGame}).fetch()
 		}
 	},
 
-	componentDidMount(){
-		let currentGame = this.props.currentGame;
-	},
+  componentDidMount(){
+    let currentGame = FlowRouter.getParam('game');
+    this.props.actions.setCurrentGame(currentGame);
+  },
 
 	render(){
 
-		let games = this.data.games;
+		let game = this.data.game;
 		let rules = this.data.rules;
 		let rulesets = this.data.rulesets;
-		let currentGame = this.props.currentGame;
 
-		return (
-			<div className={wrapperStyles.page}>
-				<Page>
-					<PageContent>
-						<header className={gameStyles.header}>
-							<GameSearch games={games} actions={this.props.actions} currentGame={this.props.currentGame}/>
+    if (this.data.loading){
+      return(
+        <p>loading...</p>
+      )
+    } else {
+  		return (
+  			<div className={wrapperStyles.page}>
+  				<Page>
+  					<PageContent>
+  						<header className={gameStyles.header}>
+                  <h2>{game.title}</h2>
+  								<GameActions {...this.props} />
+  						</header>
 
-							{currentGame &&
-								<GameActions {...this.props} />
-							}
-
-							<p className={gameStyles.link}><a href={"/games/" +  currentGame}>{currentGame}</a></p>
-						</header>
-
-						{currentGame &&
-							<div className={gameStyles.main}>
-								<RulesList rules={this.data.rules}/>
-								<RulesetsList rulesets={this.data.rulesets}/>
-							</div>
-						}
-					</PageContent>
-				</Page>
-			</div>
-		)
+  						<div className={gameStyles.main}>
+  							<RulesList rules={this.data.rules} public={true}/>
+  							<RulesetsList rulesets={this.data.rulesets} public={true}/>
+  						</div>
+  					</PageContent>
+  				</Page>
+  			</div>
+  		)
+    }
 	},
 
 	_addRule(){
@@ -82,4 +81,4 @@ const DashboardPage = React.createClass({
 	}
 });
 
-export default DashboardPage;
+export default GamePage;

@@ -1,5 +1,8 @@
-const	AnimateItem = function(item, animation){
+export function AnimateItem(item, animation){
 	TweenMax.to(item, animation.duration, animation.properties)
 }
 
-export default AnimateItem;
+export function resetCounts(){
+	Session.set('ruleCount', 0);
+	Session.set('rulesetCount', 0);
+}
