@@ -1,17 +1,26 @@
+import React from 'react';
+import Form from './form.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
-import AnimateItem from '../../animations.js';
-import PageAnimations from '../Page/PageAnimations.js';
 
-
-let loginForm = {
+let attributes = {
 	fields: [
 		{type: 'text', label: 'username', className: ['field', 'full'], name: 'username'},
 		{type: 'password', label:"password", className: ['field', 'full'], name: 'password'},
-		{type: 'submit', value: 'Login', className: ['submit']}
+		{type: 'submit', value: 'Login'}
 	],
-	type: 'login',
-	animateIn: false,
-	onSubmit: function(e){
+	type: 'login'
+}
+
+const LoginForm = React.createClass({
+
+	render(){
+		return (
+			<Form attributes={attributes} onSubmit={this._onSubmit} />
+		)
+	},
+
+	_onSubmit(e){
+		console.log(e);
 		e.preventDefault();
 
 		var userName = $(e.target).find('[name="username"]').val();
@@ -31,7 +40,11 @@ let loginForm = {
 			if (error)
 				Alerts.throw(error, 'error')
 			else{
-				AnimateItem($('.page'), PageAnimations.animateOut)
+
+				TweenMax.to($('.page__base'), .5, {
+					opacity: 0,
+					ease: Power2.easeOut
+				})
 
 				Meteor.setTimeout(function(){
 					FlowRouter.go('/dashboard');
@@ -39,6 +52,6 @@ let loginForm = {
 			}
 		})
 	}
-};
+})
 
-export default loginForm;
+export default LoginForm;

@@ -1,8 +1,8 @@
+import React from 'react';
+import Form from './form.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
-import AnimateItem from '../../animations.js';
-import PageAnimations from '../Page/PageAnimations.js';
 
-let registerForm = {
+let attributes = {
 	fields: [
 		{type: 'text', label: 'Username', name: 'username', className:['field','full']},
 		{type: 'email', label: 'Email', name: 'email', className:['field','full']},
@@ -11,8 +11,18 @@ let registerForm = {
 		{type: 'submit', value: 'Register', className: ['submit','full']}
 	],
 	type: 'login-form',
-	animateIn: false,
-	onSubmit: function(e){
+	animateIn: false
+}
+
+const RegisterForm = React.createClass({
+
+	render(){
+		return (
+			<Form attributes={attributes} onSubmit={this._onSubmit} />
+		)
+	},
+
+	_onSubmit(e){
 		e.preventDefault();
 
 		var user = {
@@ -52,6 +62,6 @@ let registerForm = {
 			})
 		)
 	}
-};
+})
 
-export default registerForm;
+export default RegisterForm;

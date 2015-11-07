@@ -20,8 +20,8 @@ const DashboardPage = React.createClass({
 	getMeteorData(){
 		let currentGame = this.props.currentGame;
 		let gameSub = Meteor.subscribe('gameList');
-		let rulesSub = Meteor.subscribe('rulesListByGameId', currentGame)
-		let rulesetsSub = Meteor.subscribe('rulesetsListByGameId', currentGame)
+		let rulesSub = Meteor.subscribe('userRulesByGameId', currentGame)
+		let rulesetsSub = Meteor.subscribe('userRulesetsByGameId', currentGame)
 
 		return {
 			loading: !rulesSub.ready() || !gameSub.ready() || !rulesetsSub.ready(),
@@ -41,6 +41,7 @@ const DashboardPage = React.createClass({
 		let rules = this.data.rules;
 		let rulesets = this.data.rulesets;
 		let currentGame = this.props.currentGame;
+		let currentGameEncoded = encodeURI(currentGame);
 
 		return (
 			<div className={wrapperStyles.page}>
@@ -53,7 +54,7 @@ const DashboardPage = React.createClass({
 								<GameActions {...this.props} />
 							}
 
-							<p className={gameStyles.link}><a href={"/games/" +  currentGame}>{currentGame}</a></p>
+							<p className={gameStyles.link}><a href={"/games/" +  currentGameEncoded}>{currentGame}</a></p>
 						</header>
 
 						{currentGame &&

@@ -1,4 +1,4 @@
-const PageAnimations = {
+let PageAnimations = {
 	defaults: {
 		duration: .1,
 		properties: {

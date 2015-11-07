@@ -3,13 +3,10 @@ import { render } from 'react-dom';
 
 //components
 import { Page, PageContent } from '../Page/page.jsx';
-import Form from '../Form/form.jsx';
+import LoginForm from '../Form/_loginForm.jsx';
 import Button from '../Button/button.jsx';
 import { TwitterIcon } from '../Icons/icons.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
-
-//forms
-import { loginForm } from  '../Form/Forms.js';
 
 //styles
 import wrapperStlyes from '../../Stylesheets/wrapper.scss';
@@ -23,7 +20,7 @@ const LoginPage = React.createClass({
 			<Page>
 				<PageContent>
 					<div className={wrapperClassName}>
-						<Form attributes={loginForm}/>
+						<LoginForm/>
 						<Button type="twitter" action={twitterLogin}>{TwitterIcon} Login With Twitter</Button>
 						<p>No account? <a href='/register' className="transition-link">Register</a></p>
 

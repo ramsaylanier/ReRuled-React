@@ -5,7 +5,7 @@ import { Page, PageContent } from '../Page/page.jsx';
 import Form from '../Form/form.jsx';
 
 //forms
-import { registerForm } from '../Form/Forms.js';
+import RegisterForm from '../Form/_registerForm.jsx';
 
 //styles
 import wrapperStlyes from '../../Stylesheets/wrapper.scss';
@@ -20,7 +20,7 @@ const RegisterPage = React.createClass({
 			<Page>
         <PageContent>
   				<div className={wrapperClassName}>
-  					<Form attributes={registerForm} />
+  					<RegisterForm />
   				</div>
         </PageContent>
 			</Page>

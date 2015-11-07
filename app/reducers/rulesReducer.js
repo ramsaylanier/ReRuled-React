@@ -1,16 +1,19 @@
-import { ADD_RULE_TO_RULESET, SET_CURRENT_RULE } from '../constants/actionTypes.js';
+import { SET_CURRENT_RULE, SET_CURRENT_RULESET } from '../constants/actionTypes.js';
 
 let initialState = {
-  rules: [],
-  ruleCount: 0
+
 }
 
 export default function rules(state = initialState, action){
+
+  console.log('action:', action);
+  console.log('state:', state);
+
   switch(action.type){
-    case ADD_RULE_TO_RULESET:
+    case SET_CURRENT_RULESET:
       return Object.assign({}, state, {
-          rules: action.rules
-        })
+        currentRuleset: action.ruleset
+      })
     case SET_CURRENT_RULE:
       return Object.assign({}, state, {
           currentRule: action.rule

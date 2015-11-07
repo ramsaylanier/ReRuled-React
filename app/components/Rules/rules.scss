@@ -14,9 +14,10 @@
 
 .title{
   font-family: $sansSerif;
-  font-weight: 900;
+  font-weight: 700;
   color: $primary;
   margin-bottom: .5rem;
+  display: inline-block;
 
   a{
     color: $primary;
@@ -24,12 +25,22 @@
 }
 
 .item{
+  position: relative;
   padding: .5rem;
   background-color: darken(white, 5%);
+  overflow: hidden;
 
   &:not(:last-of-type){
     margin-bottom: .5rem;
   }
+}
+
+.rule{
+  composes: item;
+}
+
+.ruleset{
+  composes: item;
 }
 
 .meta{
@@ -47,4 +58,10 @@
 
 .rulesets{
   margin: 1.5rem 0rem;
+}
+
+.actions{
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

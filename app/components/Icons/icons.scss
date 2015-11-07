@@ -10,6 +10,11 @@
   height: 40px;
 }
 
+.small{
+  width: 20px;
+  height: 20px;
+}
+
 .twitter{
   composes: base;
   path{
@@ -17,24 +22,41 @@
   }
 }
 
-.plus, .play, .stop{
-  composes: base;
-  line, polygon, rect{
-    stroke: white;
-    stroke-width: 5;
-  }
-}
-
 .logo{
   height: 100%;
 }
 
+.action{
+  transition: all 300ms ease-out;
+
+  &:hover{
+    transform: rotate(90deg);
+    path{
+      fill: $secondary;
+    }
+  }
+}
+
+
 .delete{
-  composes: base;
+  composes: small;
+  composes: action;
+  path{
+    fill: $primary;
+  }
+}
+
+.edit{
+  composes: small;
+  composes: action;
+  path{
+    fill: $primary;
+  }
 }
 
 .copy{
   composes: base;
+  composes: action;
 }
 
 .twitter-icon{
@@ -72,14 +94,6 @@
 		stroke: white;
 		stroke-width: 5;
 	}
-}
-
-.delete{
-  composes: base;
-}
-
-.copy-icon{
-
 }
 
 .nav-icon{

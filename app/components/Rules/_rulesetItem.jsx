@@ -3,31 +3,40 @@ import ReactDOM from 'react-dom';
 
 import styles from './rules.scss';
 
-export default class RulesetItem extends Component{
+import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
+
+const RulesetItem = React.createClass({
 
   componentDidMount(){
-    let count = Session.get('rulesetCount') || 0;
-    count = count + 1;
-    Session.set('rulesetCount', count );
-    let item = $(ReactDOM.findDOMNode(this.refs.item));
-    TweenMax.fromTo(item ,1, {
+    TweenMax.staggerFromTo($('.rules__ruleset') ,1, {
       opacity: 0,
       y: 20
     },{
       opacity: 1,
       y: 0,
-      ease: Power4.easeOut,
-      delay: count / 30
-    })
-  }
+      ease: Power4.easeOut
+    },
+    .05);
+  },
 
   render(){
     let ruleset = this.props.ruleset;
+    let ruleCount = ruleset.rules ? ruleset.rules.length : 0;
 
     return(
-      <li ref="item" className={styles.item}>
-        <h5 className={styles.title}>{ruleset.name}</h5>
+      <li ref="item" className={styles.ruleset}>
+        <h5 className={styles.title}><a href="#" onClick={this._onClick}>{ruleset.name}</a></h5>
+        <p>{ruleCount}</p>
       </li>
     )
+  },
+
+  _onClick(e){
+    e.preventDefault();
+    let ruleset = this.props.ruleset;
+    this.props.actions.setCurrentRuleset(ruleset);
+    this.props.actions.setCurrentModal(<EditRulesetModal/>);
   }
-}
+});
+
+export default RulesetItem

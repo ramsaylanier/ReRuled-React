@@ -57,8 +57,8 @@ const GamePage = React.createClass({
   						</header>
 
   						<div className={gameStyles.main}>
-  							<RulesList rules={this.data.rules} public={true}/>
-  							<RulesetsList rulesets={this.data.rulesets} public={true}/>
+  							<RulesList rules={this.data.rules} public={true} {...this.props}/>
+  							<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
   						</div>
   					</PageContent>
   				</Page>

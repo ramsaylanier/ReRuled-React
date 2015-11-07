@@ -10,11 +10,11 @@ import buttonStyles from '../Button/button.scss';
 const AddToRulesetModal = React.createClass({
   render(){
     let rule = this.props.currentRule;
-    let rulesets = Rulesets.find({});
+    let rulesets = Rulesets.find({creator: Meteor.userId(), "rules._id": {$nin: [this.props.currentRule._id]}});
 
     return(
       <Modal {...this.props}>
-        <h3 className={styles.title}>{rule.name}</h3>
+        <h5 className={styles.title}>{rule.name}</h5>
         <p className={styles.description}>{rule.description}</p>
 
         <div className={styles.rulesets}>
@@ -40,7 +40,7 @@ const AddToRulesetModal = React.createClass({
       if (err){
         Alerts.throw(err.reason, 'error')
       } else {
-        Alerts.throw('rule added!', 'sccuess');
+        Alerts.throw('rule added!', 'success');
       }
     })
   }

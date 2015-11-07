@@ -44,7 +44,8 @@
     "lodash": "^3.10.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-mixin": "^2.0.1"
+    "react-mixin": "^2.0.1",
+    "react-tap-event-plugin": "^0.2.1"
   },
   "scripts": {
     "lint": "eslint app"

@@ -123,12 +123,6 @@ const PrimaryNav = {
   	if (Meteor.user()){
   		navItems = [
   			{
-  				url: '/search',
-  				name: 'search',
-  				icon: SearchIcon,
-  				className: 'transition-link search-toggle'
-  			},
-  			{
   				url: '',
   				name: Meteor.user().username,
   				icon: <Avatar image={Meteor.user().profile.avatar} />

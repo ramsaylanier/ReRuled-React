@@ -95,6 +95,19 @@
   }
 }
 
+.icon{
+  composes: base;
+  background-color: transparent;
+  padding: 0;
+}
+
+.rule-action{
+  composes: icon;
+  position: absolute;
+  bottom: -100%;
+  right: 0;
+}
+
 .application.shelf-active{
 	.floating-toggle{
 		transform: translateX(-60px);

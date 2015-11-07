@@ -19,6 +19,16 @@ Meteor.methods({
     var ruleId = Rules.insert({name: name, description: description, game: game, creator: creator, creatorName: creatorName});
     return ruleId;
   },
+  deleteRule: function(ruleId, creatorId){
+    check(ruleId, String);
+    check(creatorId, String);
+
+    if (creatorId !== this.userId){
+      throw new Meteor.Error(422, 'You are not the creator of this rule')
+    }
+
+    return Rules.remove(ruleId);
+  },
   createRuleset: function(ruleset){
     check(ruleset, {
       name: String,

@@ -15,6 +15,8 @@ import "./app.scss";
    }
 
   render() {
+    console.log('app render');
+    console.log(this.props);
     const { currentModal, currentGame, actions } = this.props
 
     let view = React.cloneElement(this.props.view, this.props);
@@ -52,8 +54,8 @@ import "./app.scss";
 function mapStateToProps(state) {
   return {
     currentGame: state.games.currentGame,
-    rules: state.rules.rules,
     currentRule: state.rules.currentRule,
+    currentRuleset: state.rules.currentRuleset,
     currentModal: state.ui.currentModal
   }
 }

@@ -4,28 +4,41 @@ import RulesetItem from './_rulesetItem.jsx';
 import styles from './rules.scss';
 
 
-export default class RulesetsList extends Component{
-
-  componentDidMount(){
-    Session.set('rulesetCount', 0);
-  }
+const RulesetsList = React.createClass({
 
   render(){
-    let rulesets = this.props.rulesets;
     let heading = this.props.public ? "Public Rulesets:" : "Your Rulesets:";
 
-    console.log(this.props);
     return(
       <div className={styles.container}>
         <h5 className={styles.heading}>{heading}</h5>
           <ul className={styles.list}>
-            {rulesets.map( ruleset => {
-              return(
-                <RulesetItem ruleset={ruleset} {...this.props}/>
-              )
-            })}
+
+            {this._showRulesets()}
+
           </ul>
       </div>
     )
+  },
+
+  _showRulesets(){
+    let rulesets = this.props.rulesets;
+
+    if (rulesets.length > 0){
+      return (
+        rulesets.map( ruleset => {
+          return(
+            <RulesetItem ruleset={ruleset} {...this.props}/>
+          )
+        })
+      )
+    } else {
+      return this.props.public ?
+        <p>There aren't any rulesets for this game.</p> :
+        <p>You haven't created any rulesets for this game.</p>
+    }
   }
-}
+});
+
+
+export default RulesetsList;
