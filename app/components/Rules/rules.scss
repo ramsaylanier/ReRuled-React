@@ -33,6 +33,22 @@
   &:not(:last-of-type){
     margin-bottom: .5rem;
   }
+
+  &:hover{
+    .actions{
+      transform: translateY(60px);
+      opacity: 1;
+      transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 0ms;
+    }
+  }
+}
+
+.actions{
+  position: absolute;
+  top: -50px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 300ms;
 }
 
 .rule{
@@ -58,10 +74,4 @@
 
 .rulesets{
   margin: 1.5rem 0rem;
-}
-
-.actions{
-  position: absolute;
-  top: 20px;
-  right: 20px;
 }

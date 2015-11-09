@@ -16,13 +16,6 @@ export default class GameSearch extends Component{
   }
 
   componentDidMount(){
-    console.log(this.props.currentGame);
-    let queryParams = FlowRouter.getQueryParam('game');
-
-    if (queryParams){
-      this.props.actions.setCurrentGame(queryParams);
-    }
-
     $('[name=game-search-field]').val(this.props.currentGame);
   }
 

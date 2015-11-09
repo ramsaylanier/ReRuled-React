@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './rules.scss';
-import actionStyles from './actions.scss';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import RuleActions from './_ruleActions.jsx';
 import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
 import Button from '../Button/button.jsx';
 import { DeleteIcon, EditIcon } from '../Icons/icons.jsx';
@@ -17,15 +15,22 @@ injectTapEventPlugin();
 const RuleItem = React.createClass({
 
   componentDidMount(){
-    TweenMax.staggerFromTo($('.rules__rule') ,1, {
-      opacity: 0,
-      y: 20
-    },{
-      opacity: 1,
-      y: 0,
-      ease: Power4.easeOut
-    },
-    .05);
+    let rules = $('.rules__rule');
+
+    _.each(rules, (rule, index) => {
+      if (rule == this.refs.item){
+        TweenMax.fromTo($(this.refs.item) ,1, {
+          opacity: 0,
+          y: 10
+        },{
+          opacity: 1,
+          y: 0,
+          ease: Power4.easeOut,
+          delay: index / 20
+        });
+      }
+    })
+
   },
 
   render(){
@@ -33,11 +38,11 @@ const RuleItem = React.createClass({
     let isCreator = this.props.rule.creator === Meteor.userId();
 
     return(
-      <li ref="item" className={styles.rule} onMouseEnter={this._showActions} onMouseLeave={this._hideActions}>
+      <li ref="item" className={styles.rule}>
         <h5 className={styles.title}>{rule.name}</h5>
 
         {isCreator &&
-        <div ref="actions" className={actionStyles.container}>
+        <div ref="actions" className={styles.actions}>
           <Button action={this._editRule} type="icon">{ EditIcon }</Button>
           <Button action={this._deleteRule} type="icon">{ DeleteIcon }</Button>
         </div>
@@ -53,7 +58,8 @@ const RuleItem = React.createClass({
 
   _editRule(e){
     e.preventDefault();
-    this.props.actions.setCurrentRule(this.props.rule);
+    FlowRouter.setQueryParams({rule: this.props.rule._id})
+    this.props.actions.setCurrentRule(this.props.rule._id);
     this.props.actions.setCurrentModal(<AddToRulesetModal/>);
   },
 

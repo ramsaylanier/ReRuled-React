@@ -7,6 +7,7 @@ import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
+import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -24,7 +25,8 @@ const DashboardPage = React.createClass({
 		let rulesetsSub = Meteor.subscribe('userRulesetsByGameId', currentGame)
 
 		return {
-			loading: !rulesSub.ready() || !gameSub.ready() || !rulesetsSub.ready(),
+			rulesLoading: !rulesSub.ready(),
+			rulesetsLoading: !rulesetsSub.ready(),
 			games: Games.find().fetch(),
 			rules: Rules.find({game: currentGame}).fetch(),
 			rulesets: Rulesets.find({game: currentGame}).fetch()
@@ -32,16 +34,24 @@ const DashboardPage = React.createClass({
 	},
 
 	componentDidMount(){
-		let currentGame = this.props.currentGame;
+		let currentGame = FlowRouter.getQueryParam('game');
+		let currentRule = FlowRouter.getQueryParam('rule');
+
+		if (currentGame){
+			this.props.actions.setCurrentGame(currentGame);
+		}
+
+		if (currentRule){
+			this.props.actions.setCurrentRule(currentRule);
+			this.props.actions.setCurrentModal(<AddToRulesetModal/>);
+		}
 	},
 
 	render(){
-
 		let games = this.data.games;
 		let rules = this.data.rules;
 		let rulesets = this.data.rulesets;
 		let currentGame = this.props.currentGame;
-		let currentGameEncoded = encodeURI(currentGame);
 
 		return (
 			<div className={wrapperStyles.page}>
@@ -49,20 +59,19 @@ const DashboardPage = React.createClass({
 					<PageContent>
 						<header className={gameStyles.header}>
 							<GameSearch games={games} actions={this.props.actions} currentGame={this.props.currentGame}/>
-
-							{currentGame &&
-								<GameActions {...this.props} />
-							}
-
-							<p className={gameStyles.link}><a href={"/games/" +  currentGameEncoded}>{currentGame}</a></p>
+							{ currentGame && <GameActions {...this.props} /> }
+							<p className={gameStyles.link}><a href={"/games/" +  currentGame}>{currentGame}</a></p>
 						</header>
 
-						{currentGame &&
-							<div className={gameStyles.main}>
+						<div className={gameStyles.main}>
+							{!this.data.rulesLoading &&
 								<RulesList rules={this.data.rules} actions={this.props.actions}/>
+							}
+
+							{!this.data.rulesetsLoading &&
 								<RulesetsList rulesets={this.data.rulesets} actions={this.props.actions}/>
-							</div>
-						}
+							}
+						</div>
 					</PageContent>
 				</Page>
 			</div>

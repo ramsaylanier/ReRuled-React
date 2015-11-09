@@ -15,10 +15,7 @@ import "./app.scss";
    }
 
   render() {
-    console.log('app render');
-    console.log(this.props);
     const { currentModal, currentGame, actions } = this.props
-
     let view = React.cloneElement(this.props.view, this.props);
 
     return (
@@ -44,9 +41,7 @@ import "./app.scss";
     if (this.props.currentModal){
       let modal = React.cloneElement(this.props.currentModal, this.props);
 
-      return(
-        modal
-      )
+      return( modal )
     }
   }
 }

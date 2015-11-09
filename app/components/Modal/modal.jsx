@@ -10,6 +10,10 @@ const Modal = React.createClass({
 
 	componentDidMount(){
 		animateModalIn();
+
+		$('.page__overlay').on('click', e => {
+			this._animateModalOut();
+		})
 	},
 
 	render(){

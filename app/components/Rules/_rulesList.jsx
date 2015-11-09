@@ -10,7 +10,6 @@ const RulesList = React.createClass({
     let heading = this.props.public ? "Public Rules:" : "Your Rules:";
     heading = this.props.noHeading ? '' : heading;
 
-
     return(
       <div className={styles.container}>
         <h5 className={styles.heading}>{heading}</h5>
