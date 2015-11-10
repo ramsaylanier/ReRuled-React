@@ -8,6 +8,10 @@
   }
 }
 
+.list{
+  padding: 0;
+}
+
 .heading{
   font-weight: 900;
 }
@@ -55,14 +59,6 @@
   composes: item;
 }
 
-.ruleset{
-  composes: item;
-}
-
-.meta{
-
-}
-
 .creator{
   font-size: .7rem;
 }
@@ -70,6 +66,32 @@
 .description{
   margin: 0;
   line-height: 1.5rem;
+  padding: .5rem;
+  background: darken(white, 5%);
+}
+
+.link{
+  color: $dark;
+  border-bottom: 1px solid $primary;
+
+  &:hover{
+    color: $primary;
+  }
+}
+
+.game_link{
+  font-size: 1rem;
+  composes: link;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+// ******************************************
+// ************** RULESETS ******************
+// ******************************************
+
+.ruleset{
+  composes: item;
 }
 
 .rulesets{

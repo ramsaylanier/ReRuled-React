@@ -5,34 +5,65 @@ import AutocompleteField from '../Form/autocomplete.jsx';
 
 import { resetCounts } from '../../animations.js';
 
-export default class GameSearch extends Component{
+const GameSearch = React.createClass({
 
-  constructor(props){
-    super(props);
-    this._itemOnClick = this._itemOnClick.bind(this);
-    this.state = {
+  getInitialState(){
+    return{
       games: {}
     }
-  }
+  },
 
   componentDidMount(){
-    $('[name=game-search-field]').val(this.props.currentGame);
-  }
+    this._animateSearchIn();
+  },
 
   render(){
 
     return (
-      <div className={styles.search}>
-        <AutocompleteField ref="search" label="Enter A Game" items={this.props.games} fieldKey="title" name="game-search-field" itemClick={this._itemOnClick}/>
+      <div ref="search" className={styles.search}>
+        <label ref="label" className={styles.label}>What Game are You Playing?</label>
+        <AutocompleteField ref="search" items={this.props.games} fieldKey="title" name="game-search-field" itemClick={this._itemOnClick}/>
       </div>
     )
-  }
+  },
+
+  _animateSearchOut(){
+    let search = this.refs.search;
+    let dY = (window.innerHeight - $(search).outerHeight()) / 4
+    TweenMax.to(search, .3, {
+      scale: .95,
+      y: 80,
+      opacity: 0,
+      ease: Power4.easeOut
+    })
+  },
+
+  _animateSearchIn(){
+    let search = this.refs.search;
+    TweenMax.fromTo(search, .3, {
+      scale: .95,
+      opacity: 0,
+      y: 80
+    },{
+      scale: 1,
+      opacity: 1,
+      y: 100,
+      ease: Power4.easeOut
+    })
+  },
 
   _itemOnClick(e){
-    resetCounts();
     let gameName = $(e.currentTarget).text();
-    this.props.actions.setCurrentGame(gameName);
-    FlowRouter.setQueryParams({'game':gameName});
+    resetCounts();
+    this._animateSearchOut();
+
+    Meteor.setTimeout( () => {
+      this.props.actions.setCurrentGame(gameName);
+      FlowRouter.setQueryParams({'game':gameName});
+      FlowRouter.go('/games/' + gameName);
+    }, 300)
   }
 
-}
+});
+
+export default GameSearch;

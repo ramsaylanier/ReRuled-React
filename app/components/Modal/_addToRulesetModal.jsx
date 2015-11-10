@@ -24,7 +24,6 @@ const AddToRulesetModal = React.createClass({
 
   render(){
     let rule = this.data.rule;
-    let rulesets = Rulesets.find({creator: Meteor.userId(), "rules._id": {$nin: [this.props.currentRule._id]}});
 
     if (rule){
       return(
@@ -32,7 +31,9 @@ const AddToRulesetModal = React.createClass({
           <h5 className={styles.title}>{rule.name}</h5>
           <p className={styles.description}>{rule.description}</p>
 
+          {this._currentRulesets()}
           {this._rulesetsSelect()}
+
           <button onClick={this._onClick} className={buttonStyles.small_primary}>Add To Ruleset</button>
         </Modal>
       )
@@ -41,6 +42,24 @@ const AddToRulesetModal = React.createClass({
         <Modal {...this.props}>
           <p>...loading</p>
         </Modal>
+      )
+    }
+  },
+
+  _currentRulesets(){
+    let rulesets = Rulesets.find({creator: Meteor.userId(), "rules._id": {$in: [this.data.rule._id]}}).fetch();
+    if (rulesets.length > 0){
+      return(
+        <div className={styles.rulesets}>
+          <h5>Current Rulesets</h5>
+          <ul className={styles.list}>
+            {rulesets.map( ruleset => {
+              return(
+                <li className={styles.ruleset}><a className={styles.link}>{ruleset.name}</a></li>
+              )
+            })}
+          </ul>
+        </div>
       )
     }
   },

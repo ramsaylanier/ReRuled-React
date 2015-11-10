@@ -94,7 +94,7 @@ const PageContent = React.createClass({
 	render(){
 
 		let className = styles.content;
-		let wrapperClassName = wrapperStyles.main;
+		let wrapperClassName = wrapperStyles[this.props.wrapperType] || wrapperStyles.main;
 
 		return(
 			<div className={className}>

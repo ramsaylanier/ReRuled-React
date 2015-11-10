@@ -26,10 +26,10 @@
   border-radius: 2px;
   border: 1px solid $primary;
   z-index: 900;
+  width: 100%;
 }
 
 .list{
-  max-width: 500px;
   max-height: 300px;
   overflow: auto;
 }

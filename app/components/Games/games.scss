@@ -15,24 +15,20 @@
 
 .header{
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .search{
   position: relative;
-  display: inline-block;
-  margin-right: 1rem;
-
+  width: 100%;
+  max-width: 500px;
+  margin: 0rem auto 1rem auto;
+  z-index: 100;
 }
 
-.field{
-  padding: .5rem;
-  border: 0;
-  font-size: .9rem;
-  border-radius: 2px;
-
-  &:focus, &:active{
-    outline: none;
-  }
+.label{
+  display: block;
+  margin-bottom: .5rem;
 }
 
 .found{
@@ -61,7 +57,7 @@
 }
 
 .actions{
-  display: inline-block;
+  text-align: center;
   button{
     &:not(:last-of-type){
       margin-right: 1rem;

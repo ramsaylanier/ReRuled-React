@@ -26,3 +26,8 @@
 	composes: form;
 	background-color: white;
 }
+
+.tight{
+	composes: base;
+	max-width: 750px;
+}

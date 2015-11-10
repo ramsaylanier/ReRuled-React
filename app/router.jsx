@@ -9,13 +9,12 @@ import App from './containers/app.jsx';
 import * as Page from './components/Page/Pages.js';
 
 FlowRouter.route('/', {
-	triggersEnter: [function(context, redirect){
-		if (!Meteor.user()){
-			redirect('/login');
-		} else (
-			redirect('/dashboard')
+	action: function(){
+		ReactDOM.render(
+			<Root view={<Page.LandingPage/>}/>,
+			document.getElementById('react-root')
 		)
-	}]
+	}
 });
 
 FlowRouter.route('/login', {
@@ -54,6 +53,15 @@ FlowRouter.route('/games/:game', {
 	action: function(){
 		ReactDOM.render(
 			<Root view=<Page.GamePage />/>,
+			document.getElementById('react-root')
+		)
+	}
+})
+
+FlowRouter.route('/rules/:rule', {
+	action: function(){
+		ReactDOM.render(
+			<Root view=<Page.RulePage />/>,
 			document.getElementById('react-root')
 		)
 	}

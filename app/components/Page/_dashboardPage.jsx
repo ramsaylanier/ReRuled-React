@@ -8,6 +8,7 @@ import GameActions from '../Games/_gameActions.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
 import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
+import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -34,10 +35,14 @@ const DashboardPage = React.createClass({
 	},
 
 	componentDidMount(){
-		let currentGame = FlowRouter.getQueryParam('game');
+		let currentGame = this.props.currentGame;
 		let currentRule = FlowRouter.getQueryParam('rule');
+		let currentRuleset = FlowRouter.getQueryParam('ruleset');
 
 		if (currentGame){
+			FlowRouter.setQueryParams({'game': currentGame})
+		} else {
+			currentGame = FlowRouter.getQueryParam('game');
 			this.props.actions.setCurrentGame(currentGame);
 		}
 
@@ -45,9 +50,15 @@ const DashboardPage = React.createClass({
 			this.props.actions.setCurrentRule(currentRule);
 			this.props.actions.setCurrentModal(<AddToRulesetModal/>);
 		}
+
+		if (currentRuleset){
+			this.props.actions.setCurrentRuleset(currentRuleset);
+			this.props.actions.setCurrentModal(<EditRulesetModal/>);
+		}
 	},
 
 	render(){
+		console.log('dashboard render');
 		let games = this.data.games;
 		let rules = this.data.rules;
 		let rulesets = this.data.rulesets;

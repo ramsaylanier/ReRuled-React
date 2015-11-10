@@ -39,7 +39,7 @@ const RuleItem = React.createClass({
 
     return(
       <li ref="item" className={styles.rule}>
-        <h5 className={styles.title}>{rule.name}</h5>
+        <h5 className={styles.title}><a href={"/rules/" + rule._id}>{rule.name}</a></h5>
 
         {isCreator &&
         <div ref="actions" className={styles.actions}>
@@ -58,12 +58,13 @@ const RuleItem = React.createClass({
 
   _editRule(e){
     e.preventDefault();
-    FlowRouter.setQueryParams({rule: this.props.rule._id})
+    FlowRouter.setQueryParams({rule: this.props.rule._id, ruleset: null})
     this.props.actions.setCurrentRule(this.props.rule._id);
     this.props.actions.setCurrentModal(<AddToRulesetModal/>);
   },
 
   _deleteRule(e){
+    console.log(this.props);
     this.props.actions.setCurrentRule(this.props.rule);
     let ruleId = this.props.rule._id;
     let creatorId = this.props.rule.creator;

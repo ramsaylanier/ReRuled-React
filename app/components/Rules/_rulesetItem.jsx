@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import styles from './rules.scss';
 
 import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
+import Button from '../Button/button.jsx';
+import { EditIcon, DeleteIcon } from '../Icons/icons.jsx';
 
 const RulesetItem = React.createClass({
 
@@ -21,21 +23,49 @@ const RulesetItem = React.createClass({
 
   render(){
     let ruleset = this.props.ruleset;
-    let ruleCount = ruleset.rules ? ruleset.rules.length : 0;
+    let isCreator = this.props.ruleset.creator === Meteor.userId();
 
     return(
       <li ref="item" className={styles.ruleset}>
-        <h5 className={styles.title}><a href="#" onClick={this._onClick}>{ruleset.name}</a></h5>
-        <p>{ruleCount}</p>
+        <h5 className={styles.title}>{ruleset.name}</h5>
+
+        {this._rulesetRules()}
+
+          {isCreator &&
+          <div ref="actions" className={styles.actions}>
+            <Button action={this._editRuleset} type="icon">{ EditIcon }</Button>
+            <Button action={this._deleteRuleset} type="icon">{ DeleteIcon }</Button>
+          </div>
+          }
       </li>
     )
   },
 
-  _onClick(e){
+  _rulesetRules(){
+    let rules = this.props.ruleset.rules;
+    if (rules){
+      return(
+        <ul className={styles.list}>
+          {rules.map( rule => {
+            return(
+              <li>{rule.name}</li>
+            )
+          })}
+        </ul>
+      )
+    }
+  },
+
+  _editRuleset(e){
     e.preventDefault();
-    let ruleset = this.props.ruleset;
-    this.props.actions.setCurrentRuleset(ruleset);
+
+    FlowRouter.setQueryParams({rule: null, ruleset: this.props.ruleset._id})
+    this.props.actions.setCurrentRuleset(this.props.ruleset._id);
     this.props.actions.setCurrentModal(<EditRulesetModal/>);
+  },
+
+  _deleteRuleset(){
+
   }
 });
 

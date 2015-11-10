@@ -22,6 +22,7 @@
 }
 
 .field{
+	composes: full;
 	position: relative;
 	border: 0;
 	font-size: 1rem;
@@ -81,22 +82,6 @@
 	}
 }
 
-// .submit__control, .checkbox__control, .textArea__control{
-// 	.input-overlay{
-// 		display: none;
-// 	}
-//
-// 	.inner{
-// 		display: block;
-// 	}
-//
-// 	.label__base{
-// 		position: relative;
-// 		left: 0;
-// 		bottom: initial;
-// 	}
-// }
-
 .overlay{
 	position: absolute;
 	width: 100%;
@@ -107,22 +92,6 @@
 	border-radius: 2px;
 	transition: height 300ms ease-out;
 }
-
-// input[type="checkbox"]{
-// 	-webkit-appearance: none;
-// 	appearance: none;
-// 	border-width: 1px;
-// 	composes: dark-border from "../../Stylesheets/colors.scss";
-// 	border-radius: 1px;
-// 	width: 15px;
-// 	height: 15px;
-// 	transition: all 300ms ease-out;
-// 	margin-bottom: 0;
-//
-// 	&:checked{
-// 		composes: dark-background from "../../Stylesheets/colors.scss";
-// 	}
-// }
 
 .textarea{
 	composes: field;
