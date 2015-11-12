@@ -6,6 +6,7 @@ import { AlertsComponent } from '../components/Alerts/alert.jsx';
 import * as ReruledActions from '../actions/index'
 
 import "./app.scss";
+import styles from '../components/Header/header.scss';
 
  class App extends Component {
 
@@ -20,11 +21,7 @@ import "./app.scss";
 
     return (
       <div className="application">
-        <Header className="app-header">
-          <div className="title-container">
-            <span className="title"></span>
-          </div>
-        </Header>
+        <Header className="app-header" title={this.props.currentGame}></Header>
 
         <AlertsComponent/>
 
@@ -49,6 +46,7 @@ import "./app.scss";
 function mapStateToProps(state) {
   return {
     currentGame: state.games.currentGame,
+    gameContent: state.games.gameContent,
     currentRule: state.rules.currentRule,
     currentRuleset: state.rules.currentRuleset,
     currentModal: state.ui.currentModal

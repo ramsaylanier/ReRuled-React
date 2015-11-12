@@ -58,9 +58,53 @@
 
 .actions{
   text-align: center;
+  padding-bottom: 2rem;
   button{
     &:not(:last-of-type){
       margin-right: 1rem;
     }
   }
+}
+
+.filters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-top: 1px solid $dark;
+}
+
+.filter{
+  display: flex;
+  flex-flow: column;
+  flex-basis: 100px;
+  padding-top: .5rem;
+  color: $dark;
+  transition: transform 150ms ease-out;
+
+  &:not(:last-of-type){
+    border-right: 1px solid $dark;
+  }
+}
+
+.filter_active{
+  color: $primary;
+
+  svg{
+    transform: translateY(10px);
+    path{
+      fill: $primary;
+    }
+  }
+}
+
+.filter_name{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: .25rem;
+  display: flex;
+  align-self: center;
+  transition: transform 150ms ease-out;
 }

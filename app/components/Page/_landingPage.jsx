@@ -27,6 +27,10 @@ const LandingPage = React.createClass({
 		}
 	},
 
+	componentDidMount(){
+		this.props.actions.setCurrentGame(null);
+	},
+
 	render(){
 		let games = this.data.games;
 

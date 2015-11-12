@@ -47,7 +47,7 @@ const LoginForm = React.createClass({
 				})
 
 				Meteor.setTimeout(function(){
-					FlowRouter.go('/dashboard');
+					FlowRouter.go('/');
 				}, 500);
 			}
 		})

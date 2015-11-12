@@ -27,3 +27,17 @@
 	background-color: $red;
 	border-color: $red;
 }
+
+.notification{
+	padding: 1rem .5rem;
+	background-color: darken(white, 5%);
+	color: $dark;
+	border-radius: 2px;
+	display: inline-block;
+	border: 2px solid $primary;
+
+	a{
+		color: $primary;
+		border-bottom: 1px solid $primary;
+	}
+}

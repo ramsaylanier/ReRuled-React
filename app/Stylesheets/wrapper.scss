@@ -31,3 +31,9 @@
 	composes: base;
 	max-width: 750px;
 }
+
+.flex{
+	composes: main;
+	display: flex;
+	justify-content: space-between;
+}

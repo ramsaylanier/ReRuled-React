@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 
 //components
 import { Page, PageContent } from '../Page/page.jsx';
+import Button from '../Button/button.jsx';
 import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
+import GameFilters from '../Games/_gameFilters.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
@@ -12,7 +14,7 @@ import { Alerts } from '../Alerts/alert.jsx';
 //styles
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
 import gameStyles from '../Games/games.scss';
-
+import alertStyles from '../Alerts/alerts.scss';
 
 const GamePage = React.createClass({
 	mixins: [ReactMeteorData],
@@ -41,6 +43,7 @@ const GamePage = React.createClass({
 		let game = this.data.game;
 		let rules = this.data.rules;
 		let rulesets = this.data.rulesets;
+		let currentUser = Meteor.userId();
 
     if (this.data.loading){
       return(
@@ -53,18 +56,36 @@ const GamePage = React.createClass({
   					<PageContent>
   						<header className={gameStyles.header}>
                   <h2>{game.title}</h2>
-  								<GameActions {...this.props} />
+
+									{currentUser ?
+	  								<GameActions {...this.props} /> :
+										<p className={alertStyles.notification}><a href="/login">Login</a> to create rules and rulesets</p>
+									}
+
+									<GameFilters {...this.props} />
   						</header>
 
   						<div className={gameStyles.main}>
-  							<RulesList rules={this.data.rules} public={true} {...this.props}/>
-  							<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
+								{this._showGamesContent()}
   						</div>
   					</PageContent>
   				</Page>
   			</div>
   		)
     }
+	},
+
+	_showGamesContent(){
+		let content = FlowRouter.getQueryParam('content');
+		if (content === 'rulesets'){
+			return(
+				<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
+			)
+		} else {
+			return (
+				<RulesList rules={this.data.rules} public={true} {...this.props}/>
+			)
+		}
 	},
 
 	_addRule(){

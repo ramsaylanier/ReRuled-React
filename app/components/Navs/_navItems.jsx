@@ -143,7 +143,7 @@ const PrimaryNav = {
   					navItems: [
   						{
   							id: 1,
-  							url: '/' + Meteor.user().username,
+  							url: '/dashboard',
   							name: 'Dashboard',
   							className: 'transition-link'
   						},
@@ -187,7 +187,10 @@ const PrimaryNav = {
   		]
   	} else {
   		navItems = [
-
+        {
+          url: '/login',
+          name: 'login'
+        }
   		]
   	}
 

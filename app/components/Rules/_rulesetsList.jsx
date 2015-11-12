@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 
 import RulesetItem from './_rulesetItem.jsx';
 import styles from './rules.scss';
+import { SetIcon } from '../Icons/icons.jsx';
 
 
 const RulesetsList = React.createClass({
 
   render(){
-    let heading = this.props.public ? "Public Rulesets:" : "Your Rulesets:";
-
     return(
       <div className={styles.container}>
-        <h5 className={styles.heading}>{heading}</h5>
           <ul className={styles.list}>
 
             {this._showRulesets()}

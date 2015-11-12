@@ -90,4 +90,20 @@ const EyeIcon = <svg className={styles.action} x="0px" y="0px" viewBox="0 0 40 4
 				c-2,0-3.7-1.6-3.7-3.7c0-2,1.6-3.7,3.7-3.7C21.5,16.7,23.2,18.5,23.2,20.5z"/>
 			</svg>
 
-export { EditIcon, DeleteIcon, CopyIcon, PlusIcon, BackIcon, MenuIcon, SearchIcon, LogoIcon, TwitterIcon, EyeIcon };
+const BookIcon = <svg className={styles.book} x="0px" y="0px" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
+			<path fill="#010101" d="M38.8,10.2h-1V8h-1.3c-1,0-1.9,0-2.8,0V5.5h-1.1c-6.5,0-10.8,0.7-12.7,2.1
+				c-2-1.4-6.4-2.1-13.2-2.1h-1V8C5,8,4.3,8,3.5,8H2.2v2.3H1l0.1,24.3H39L38.8,10.2z M4.9,30.3V10.6c0.3,0,0.6,0,0.8,0v18h1
+				c3.7,0,8.1,0.5,10.6,2.4C15,30.7,11.1,30.3,4.9,30.3z M18.9,29.7c-2.2-2-6-3.1-11.1-3.2V7.6c4.9,0.1,7.7,0.5,9.2,0.9
+				c0,0,0.1,0,0.1,0c0.9,0.3,1.4,0.5,1.7,0.7c0.1,0.1,0.2,0.1,0.3,0.1L18.9,29.7z M21.2,9.4c0.1,0,0.1,0,0.1-0.1
+				c0.3-0.2,0.8-0.5,1.9-0.8c1.5-0.4,4.1-0.8,8.4-0.9v18.9c-4.7,0.1-8.3,1.3-10.6,3.6L21.2,9.4z M35.2,29.9c-5.4,0.1-9,0.4-11.5,0.9
+				c2.1-1.4,5.1-2.1,9-2.1h1.1v-18c0.5,0,1,0,1.4,0V29.9z"/>
+				</svg>
+
+const SetIcon = <svg className={styles.set} x="0px" y="0px" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
+				<path d="M27.2,16.9v-6.1H21V4.6H6.6v18.5h6.2v6.1H19v6.1h14.4V16.9H27.2z M12.8,21.1H8.6V6.6H19v4.1h-6.2V21.1z
+				 M19,27.2h-4.2V12.8h10.4v4.1H19V27.2z M31.4,33.4H21V18.9h10.4V33.4z"/>
+				</svg>
+
+
+
+export { EditIcon, DeleteIcon, CopyIcon, PlusIcon, BackIcon, MenuIcon, SearchIcon, LogoIcon, TwitterIcon, EyeIcon, BookIcon, SetIcon };

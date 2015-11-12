@@ -1,19 +1,15 @@
 import React from 'react';
 import RuleItem from './_ruleItem.jsx';
 import styles from './rules.scss';
+import { BookIcon } from '../Icons/icons.jsx';
 
 
 const RulesList = React.createClass({
 
   render(){
     let rules = this.props.rules;
-    let heading = this.props.public ? "Public Rules:" : "Your Rules:";
-    heading = this.props.noHeading ? '' : heading;
-
     return(
       <div className={styles.container}>
-        <h5 className={styles.heading}>{heading}</h5>
-
           {this._showRules()}
       </div>
     )

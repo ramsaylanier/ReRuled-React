@@ -99,6 +99,14 @@
   composes: base;
   background-color: transparent;
   padding: 0;
+
+  &:focus{
+    outline: none;
+  }
+}
+
+.icon:focus{
+  outline: none;
 }
 
 .rule-action{

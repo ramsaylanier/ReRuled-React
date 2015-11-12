@@ -50,7 +50,7 @@
 
 .primary{
   height: 100%;
-	float: right;
+  align-self: flex-end;
 
   @media #{$mobile}{
     display: none;

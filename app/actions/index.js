@@ -35,3 +35,10 @@ export function setCurrentModal(modalName){
     modalName
   }
 }
+
+export function setGameContentType(content){
+  return{
+    type: types.SET_GAME_CONTENT_TYPE,
+    content
+  }
+}
