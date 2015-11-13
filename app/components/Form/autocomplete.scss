@@ -37,8 +37,18 @@
 .item{
   padding: .5rem;
   background-color: darken(white, 5%);
+  transition: all 150ms ease-out;
 
   &:not(:last-of-type){
     margin-bottom: .5rem;
   }
+
+  &:focus{
+    background-color: darken(white, 15%);
+  }
+}
+
+.item.active{
+  background-color: $primary;
+  color: white;
 }

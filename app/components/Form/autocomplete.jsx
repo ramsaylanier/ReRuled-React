@@ -10,19 +10,7 @@ const AutocompleteField = React.createClass({
 		return {value: this.props.value, found: {}}
 	},
 
-	componentDidMount(){
-		let input = $(ReactDOM.findDOMNode(this.refs.input));
-		let label = $(ReactDOM.findDOMNode(this.refs.label));
-
-		if (!input.length || !label.length){
-			return false;
-		} else if (input && input.val().length > 0){
-			this.activateField();
-		}
-	},
-
 	handleChange(e){
-		this.activateField(e);
 		this.setState({value: e.target.value});
 
     let items = this.props.items;
@@ -43,36 +31,31 @@ const AutocompleteField = React.createClass({
     }
 	},
 
-	activateField(e){
-		let input = $(ReactDOM.findDOMNode(this.refs.input));
-		let label = $(ReactDOM.findDOMNode(this.refs.label));
-
-		this.setState({isFocused:true});
-
-		TweenMax.to(label, .3, {
-			y: -input.outerHeight() + label.outerHeight(),
-			ease: Power2.easeOut
-		})
-	},
-
-	deactivateField(e){
-		let input = $(ReactDOM.findDOMNode(this.refs.input));
-		let label = $(ReactDOM.findDOMNode(this.refs.label));
-
-		if (input.val().length == 0){
-			this.setState({isFocused:false});
-
-			TweenMax.to(label, .3, {
-				y: 0,
-				ease: Power4.easeOut
-			});
-		}
-	},
-
 	keyDown(e){
-		if (e.keyCode == 13){
-			$('.autocomplete__item').first().click();
+		if (e.keyCode == 40){
+			this.selectItem('next')
+		} else if (e.keyCode == 38){
+			this.selectItem('prev')
+		} else if (e.keyCode == 13){
+			let currentItem = $('.autocomplete__active');
+			currentItem.click();
 		}
+	},
+
+	selectItem(direction){
+		console.log(direction);
+		let list = $(this.refs.foundList);
+		let items = list.children();
+		let currentItem = list.children('.autocomplete__active');
+		let delta = direction === 'next' ? 1 : -1
+		let nextItem = items.get(items.index(currentItem) + delta);
+
+
+		if (nextItem){
+		 currentItem.removeClass('autocomplete__active');
+		 $(nextItem).addClass('autocomplete__active');
+	 }
+
 	},
 
 	render(){
@@ -95,8 +78,6 @@ const AutocompleteField = React.createClass({
 							className={inputClassNames.join(' ')}
 							value={value}
 							onKeyDown={this.keyDown}
-							onFocus={this.activateField}
-							onBlur={this.deactivateField}
 							onChange={this.handleChange} />
 
 					{this._overlay()}
@@ -118,9 +99,8 @@ const AutocompleteField = React.createClass({
 		let type = this.props.type;
 
 		if (type !== 'submit' && type !== 'checkbox'){
-			let overlayClassName = styles.overlay;
 			return (
-				<span className={overlayClassName}></span>
+				<span className={styles.overlay}></span>
 			)
 		}
 	},
@@ -139,11 +119,11 @@ const AutocompleteField = React.createClass({
 
     if (items.length > 0){
       return(
-        <div className={autocompleteStyles.found}>
-          <ul className={autocompleteStyles.list}>
-            {items.map(item => {
+        <div ref="foundItems" className={autocompleteStyles.found}>
+          <ul ref="foundList" className={autocompleteStyles.list}>
+            {items.map( (item, index) => {
               return(
-                <li data-game-id={item._id} className={autocompleteStyles.item} onClick={this._itemClick}>{item.title}</li>
+                <li data-game-id={item._id} tabIndex={index + 1} className={autocompleteStyles.item} onClick={this._itemClick}>{item.title}</li>
               )
             })}
           </ul>
