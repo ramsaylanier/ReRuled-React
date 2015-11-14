@@ -9,6 +9,7 @@ import GameActions from '../Games/_gameActions.jsx';
 import GameFilters from '../Games/_gameFilters.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
+import Loading from '../Loading/loading.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -47,7 +48,11 @@ const GamePage = React.createClass({
 
     if (this.data.loading){
       return(
-        <p>loading...</p>
+				<Page>
+					<PageContent>
+						<Loading/>
+					</PageContent>
+				</Page>
       )
     } else {
   		return (

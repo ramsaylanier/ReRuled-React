@@ -5,10 +5,12 @@ import { Page, PageContent } from '../Page/page.jsx';
 import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
+import GameFilters from '../Games/_gameFilters.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
 import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
 import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
+import Loading from '../Loading/loading.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -21,86 +23,109 @@ const DashboardPage = React.createClass({
 
 	getMeteorData(){
 		let currentGame = this.props.currentGame;
-		let gameSub = Meteor.subscribe('gameList');
-		let rulesSub = Meteor.subscribe('userRulesByGameId', currentGame)
-		let rulesetsSub = Meteor.subscribe('userRulesetsByGameId', currentGame)
+		let userSub = Meteor.subscribe('userProfile');
+		let rulesSub = Meteor.subscribe('userRulesByGameId', currentGame);
+		let rulesetSub = Meteor.subscribe('userRulesetsByGameId', currentGame);
+
+		console.log(currentGame);
 
 		return {
+			userLoading: !userSub.ready(),
 			rulesLoading: !rulesSub.ready(),
-			rulesetsLoading: !rulesetsSub.ready(),
-			games: Games.find().fetch(),
-			rules: Rules.find({game: currentGame}).fetch(),
-			rulesets: Rulesets.find({game: currentGame}).fetch()
+			rulesetsLoading: !rulesetSub.ready(),
+			rules: Rules.find({game: currentGame, creator: Meteor.userId()}).fetch(),
+			rulesets: Rulesets.find({game: currentGame, creator: Meteor.userId()}).fetch()
 		}
 	},
 
 	componentDidMount(){
-		let currentGame = this.props.currentGame;
-		let currentRule = FlowRouter.getQueryParam('rule');
-		let currentRuleset = FlowRouter.getQueryParam('ruleset');
 
-		if (currentGame){
-			FlowRouter.setQueryParams({'game': currentGame})
-		} else {
-			currentGame = FlowRouter.getQueryParam('game');
-			this.props.actions.setCurrentGame(currentGame);
-		}
-
-		if (currentRule){
-			this.props.actions.setCurrentRule(currentRule);
-			this.props.actions.setCurrentModal(<AddToRulesetModal/>);
-		}
-
-		if (currentRuleset){
-			this.props.actions.setCurrentRuleset(currentRuleset);
-			this.props.actions.setCurrentModal(<EditRulesetModal/>);
-		}
 	},
 
 	render(){
-		console.log('dashboard render');
-		let games = this.data.games;
-		let rules = this.data.rules;
-		let rulesets = this.data.rulesets;
 		let currentGame = this.props.currentGame;
 
-		return (
-			<div className={wrapperStyles.page}>
+		if (this.data.userLoading){
+			return(
 				<Page>
 					<PageContent>
-						<header className={gameStyles.header}>
-							<GameSearch games={games} actions={this.props.actions} currentGame={this.props.currentGame}/>
-							{ currentGame && <GameActions {...this.props} /> }
-							<p className={gameStyles.link}><a href={"/games/" +  currentGame}>{currentGame}</a></p>
-						</header>
-
-						<div className={gameStyles.main}>
-							{!this.data.rulesLoading &&
-								<RulesList rules={this.data.rules} actions={this.props.actions}/>
-							}
-
-							{!this.data.rulesetsLoading &&
-								<RulesetsList rulesets={this.data.rulesets} actions={this.props.actions}/>
-							}
-						</div>
+						<Loading/>
 					</PageContent>
 				</Page>
-			</div>
-		)
+			)
+		} else {
+			return (
+				<div className={wrapperStyles.page}>
+					<Page>
+						<PageContent>
+							<header className={gameStyles.header}>
+								<h3>My Rulebook</h3>
+
+								{this._showGamesList()}
+
+								<GameFilters {...this.props} />
+							</header>
+
+							<div className={gameStyles.main}>
+								{currentGame &&
+									this._showGamesContent()
+								}
+							</div>
+						</PageContent>
+					</Page>
+				</div>
+			)
+		}
 	},
 
-	_addRule(){
-		let ruleName = $('.rule-name-field').val();
-		let gameId = this.props.currentGame;
+	_showGamesList(){
+		let games = Meteor.user().games;
 
-		Meteor.call('createRule', ruleName, gameId, function(err, res){
-			if (err){
-				Alerts.throw(err.reason, 'error')
+		if (games){
+			return(
+				<ul className={gameStyles.list}>
+				{games.map( game => {
+					return(
+						<li className={gameStyles.inline_item}>
+							<a className={gameStyles.link} onClick={this._setCurrentGame}>{game}</a>
+						</li>
+					)
+				})}
+				</ul>
+			)
+		}
+	},
+
+	_setCurrentGame(e){
+		let gameName = $(e.currentTarget).text();
+		this.props.actions.setCurrentGame(gameName);
+	},
+
+	_showGamesContent(){
+		let content = FlowRouter.getQueryParam('content');
+		if (content === 'rulesets'){
+			if (this.data.rulesetsLoading){
+				return(
+					<Loading/>
+				)
 			} else {
-				Alerts.throw('Rule Addedd!', 'success')
+				return(
+					<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
+				)
 			}
-		})
+		} else {
+			if (this.data.rulesLoading){
+				return(
+					<Loading/>
+				)
+			} else {
+				return (
+					<RulesList rules={this.data.rules} public={true} {...this.props}/>
+				)
+			}
+		}
 	}
+
 });
 
 export default DashboardPage;

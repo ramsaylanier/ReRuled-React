@@ -17,6 +17,8 @@ Meteor.methods({
     var creatorName = Meteor.users.findOne(this.userId).username;
 
     var ruleId = Rules.insert({name: name, description: description, game: game, creator: creator, creatorName: creatorName});
+
+    Meteor.call('addGameToUser', game);
     return ruleId;
   },
   deleteRule: function(ruleId, creatorId){
@@ -46,6 +48,8 @@ Meteor.methods({
     ruleset.creatorName = creatorName;
 
     var rulesetId = Rulesets.insert(ruleset);
+
+    Meteor.call('addGameToUser', ruleset.game);
     return rulesetId;
   },
   addRuleToRuleset: function(rule, rulesetId){
@@ -77,6 +81,16 @@ Meteor.methods({
 
     Rulesets.update( {_id: rulesetId}, {$addToSet: {rules: rule}} );
   },
+  addGameToUser: function(gameName){
+    check(gameName, String);
+    if (!this.userId){
+      console.log('Game not added to user because no user is logged in')
+      return;
+    }
+
+    Meteor.users.update({_id: this.userId}, {$addToSet: {games: gameName}})
+
+  },
   addGameToRecentGames: function(gameName){
     check(gameName, String);
 
@@ -86,7 +100,7 @@ Meteor.methods({
     }
 
     var recentGames = Meteor.users.findOne(this.userId).recentGames;
-    console.log('recentGames:',recentGames);
+
     if (recentGames){
       var newRecentGames = _.without(recentGames, gameName).slice(0, 5);
       newRecentGames.unshift(gameName)

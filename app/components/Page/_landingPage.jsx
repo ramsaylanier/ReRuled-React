@@ -9,6 +9,7 @@ import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
 import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
 import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
+import Loading from '../Loading/loading.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -39,7 +40,9 @@ const LandingPage = React.createClass({
 		if (this.data.loading){
 			return (
 				<Page>
-					<p>...loading</p>
+					<PageContent>
+						<Loading/>
+					</PageContent>
 				</Page>
 			)
 		} else {

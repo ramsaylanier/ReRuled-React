@@ -7,6 +7,7 @@ import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
+import Loading from '../Loading/loading.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
@@ -39,7 +40,7 @@ const RulePage = React.createClass({
 
     if (this.data.loading){
       return(
-        <p>loading...</p>
+        <Loading/>
       )
     } else {
   		return (

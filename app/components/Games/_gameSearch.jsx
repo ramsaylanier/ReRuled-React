@@ -87,7 +87,7 @@ const GameSearch = React.createClass({
               {recentGames.map( game => {
                 return(
                   <li className={styles.item}>
-                    <a href={"/games/" + game}>{game}</a>
+                    <a className={styles.link} href={"/games/" + game}>{game}</a>
                   </li>
                 )
               })}

@@ -56,6 +56,15 @@
   }
 }
 
+.inline_item{
+  composes: item;
+  display: inline-block;
+
+  &:not(:last-of-type){
+    margin-right: 1rem;
+  }
+}
+
 .actions{
   text-align: center;
   padding-bottom: 2rem;
@@ -91,7 +100,9 @@
   color: $primary;
 
   svg{
-    transform: translateY(10px);
+    transform: translateY(3px);
+    transition: transform 300ms ease-out;
+
     path{
       fill: $primary;
     }
