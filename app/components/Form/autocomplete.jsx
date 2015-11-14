@@ -117,6 +117,8 @@ const AutocompleteField = React.createClass({
     let items = this.state.found;
 		let onClick = this.props.itemClick;
 
+		console.log(this.props);
+
     if (items.length > 0){
       return(
         <div ref="foundItems" className={autocompleteStyles.found}>

@@ -76,5 +76,24 @@ Meteor.methods({
     }
 
     Rulesets.update( {_id: rulesetId}, {$addToSet: {rules: rule}} );
+  },
+  addGameToRecentGames: function(gameName){
+    check(gameName, String);
+
+    if (!this.userId){
+      console.log('not added to recent games because no user is logged in')
+      return;
+    }
+
+    var recentGames = Meteor.users.findOne(this.userId).recentGames;
+    console.log('recentGames:',recentGames);
+    if (recentGames){
+      var newRecentGames = _.without(recentGames, gameName).slice(0, 5);
+      newRecentGames.unshift(gameName)
+      Meteor.users.update({_id: this.userId}, {$set: {recentGames: newRecentGames}});
+    } else{
+      Meteor.users.update({_id: this.userId}, {$addToSet: {recentGames: gameName}});
+    }
+
   }
 })

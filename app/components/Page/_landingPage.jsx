@@ -21,8 +21,10 @@ const LandingPage = React.createClass({
 
 	getMeteorData(){
 		let gameSub = Meteor.subscribe('gameList');
+		let userSub = Meteor.subscribe('userProfile');
 
 		return {
+			loading: !gameSub.ready() || !userSub.ready(),
 			games: Games.find().fetch()
 		}
 	},
@@ -34,17 +36,25 @@ const LandingPage = React.createClass({
 	render(){
 		let games = this.data.games;
 
-		return (
-			<div className={wrapperStyles.page}>
+		if (this.data.loading){
+			return (
 				<Page>
-					<PageContent>
-						<header className={gameStyles.header}>
-							<GameSearch games={games} actions={this.props.actions} currentGame={this.props.currentGame}/>
-						</header>
-					</PageContent>
+					<p>...loading</p>
 				</Page>
-			</div>
-		)
+			)
+		} else {
+			return (
+				<div className={wrapperStyles.page}>
+					<Page>
+						<PageContent>
+							<header className={gameStyles.header}>
+								<GameSearch games={games} actions={this.props.actions} currentGame={this.props.currentGame}/>
+							</header>
+						</PageContent>
+					</Page>
+				</div>
+			)
+		}
 	}
 });
 
