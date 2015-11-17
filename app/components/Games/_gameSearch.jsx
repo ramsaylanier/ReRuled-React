@@ -8,13 +8,20 @@ import { resetCounts } from '../../animations.js';
 
 const GameSearch = React.createClass({
 
-  getInitialState(){
+  mixins: [ReactMeteorData],
+
+  getMeteorData(){
+    let searchString = Session.get('searchString');
+    let gameSub = Meteor.subscribe('games', searchString);
+
     return{
-      games: {}
+      gameSub: gameSub,
+      games: Games.find().fetch()
     }
   },
 
   componentDidMount(){
+    Session.set('searchString', '');
     this._animateSearchIn();
   },
 
@@ -23,7 +30,7 @@ const GameSearch = React.createClass({
     return (
       <div ref="search" className={styles.search}>
         <label ref="label" className={styles.label}>What Game are You Playing?</label>
-        <AutocompleteField ref="search" items={this.props.games} fieldKey="title" name="game-search-field" itemClick={this._itemOnClick}/>
+        <AutocompleteField ref="search" items={this.data.games} fieldKey="title" name="game-search-field" itemClick={this._itemOnClick}/>
 
         {this._showRecentGames()}
       </div>

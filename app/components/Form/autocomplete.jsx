@@ -7,28 +7,13 @@ import autocompleteStyles from './autocomplete.scss'
 const AutocompleteField = React.createClass({
 
 	getInitialState(){
-		return {value: this.props.value, found: {}}
+		return {value: this.props.value}}
 	},
 
 	handleChange(e){
 		this.setState({value: e.target.value});
-
-    let items = this.props.items;
-    let fieldKey = this.props.fieldKey;
-    let searchString = $(e.currentTarget).val().toLowerCase();
-    let foundItems = [];
-
-    if (!searchString){
-      this.setState({ found: {} })
-    } else {
-      _.each(items, item => {
-        let key = item[fieldKey].toLowerCase();
-        if (key.indexOf(searchString) !== -1){
-          foundItems.push(item)
-          this.setState({found: foundItems})
-        }
-      })
-    }
+    let searchString = $(e.currentTarget).val();
+		Session.set('searchString', searchString);
 	},
 
 	keyDown(e){
@@ -43,13 +28,11 @@ const AutocompleteField = React.createClass({
 	},
 
 	selectItem(direction){
-		console.log(direction);
 		let list = $(this.refs.foundList);
 		let items = list.children();
 		let currentItem = list.children('.autocomplete__active');
 		let delta = direction === 'next' ? 1 : -1
 		let nextItem = items.get(items.index(currentItem) + delta);
-
 
 		if (nextItem){
 		 currentItem.removeClass('autocomplete__active');
@@ -114,10 +97,8 @@ const AutocompleteField = React.createClass({
 	},
 
 	_showFoundItems(){
-    let items = this.state.found;
+    let items = this.props.items;
 		let onClick = this.props.itemClick;
-
-		console.log(this.props);
 
     if (items.length > 0){
       return(

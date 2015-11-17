@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './router.jsx';
 
+// import cheerio from 'cheerio';
+
+
+
 Meteor.startup(() => {
   // React.initializeTouchEvents(true);
 	// window.viewportUnitsBuggyfill.init({force:true});

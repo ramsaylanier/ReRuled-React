@@ -1,6 +1,9 @@
+var cheerio = require('cheerio');
+
 Meteor.startup(function(){
 	ServiceConfiguration.configurations.remove();
 	// Push.debug = true
+	// Meteor.call('loadGames');
 })
 
 Meteor.methods({
@@ -34,12 +37,25 @@ Meteor.methods({
 		}
 	},
 
-  testPush(){
-		Push.send({
-	        from: 'push',
-	        title: 'Hello',
-	        text: 'world', query: {}
-    	})
+  loadGames(){
+		let index = 0;
+		while (index < 800){
+			index++;
+			HTTP.get('https://boardgamegeek.com/browse/boardgame/page/' + index, function(err, res){
+				// console.log(cheerio);
+				console.log(res.statusCode)
+				if (res.statusCode === 200){
+					var $ = cheerio.load(res.content);
+					let scrapedGames = $('.collection_objectname').find('a');
+
+					_.each(scrapedGames, (game, index) => {
+						let title = $(game).text();
+						console.log(title);
+						Games.update({title: title}, {$set: {title: title}}, {upsert: true})
+					})
+				}
+			})
+		}
 	}
 });
 
