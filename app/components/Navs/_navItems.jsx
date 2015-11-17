@@ -66,39 +66,12 @@ const ShelfNav = {
   			},
   			{
   				url: '',
-  				name: 'New Deck',
-  				clickFunction: function(){
-  					var modal = document.createElement('div');
-  					$(modal).addClass('modal new-form-modal');
-  					document.body.appendChild(modal);
-
-  					$('.nav-list').removeClass('active');
-  					$('.nav-toggle').removeClass('active');
-
-  					ReactDOM.render(
-  						<Modal>
-  							<Form attributes={newDeckForm} />
-  						</Modal>,
-  						modal
-  					)
-  				}
-  			},
-  			{
-  				url: '/favorites',
-  				name: 'Favorites',
-  				className: 'transition-link',
-  				clickFunction: function(){
-  					$('.nav-list').removeClass('active');
-  					$('.nav-toggle').removeClass('active');
-  				}
-  			},
-  			{
-  				url: '',
   				name: 'logout',
   				clickFunction: function(){
   					Meteor.logout(function(error){
+              console.log(error);
   						if (!error){
-  							FlowRouter.go('/');
+  							FlowRouter.go('/login');
   						}
   					});
   				}
@@ -147,26 +120,10 @@ const PrimaryNav = {
   							name: 'Dashboard',
   							className: 'transition-link'
   						},
-  						{
-  							id: 3,
-  							url: '',
-  							name: 'New Deck',
-  							clickFunction: function(){
-  								var modal = '<div class="modal new-form-modal"></div>';
-  								$('body').append(modal);
-
-  								ReactDOM.render(
-  									<Modal>
-  										<Form attributes={newDeckForm} />
-  									</Modal>,
-  									modal
-  								)
-  							}
-  						},
-  						{
-  							id: 4,
-  							url: '/favorites',
-  							name: 'Favorites',
+              {
+  							id: 2,
+  							url: '/profile',
+  							name: 'Profile',
   							className: 'transition-link'
   						},
   						{
@@ -176,7 +133,7 @@ const PrimaryNav = {
   							clickFunction: function(){
   								Meteor.logout(function(error){
   									if (!error){
-  										FlowRouter.go('/');
+  										FlowRouter.go('/login');
   									}
   								});
   							}

@@ -109,5 +109,31 @@ Meteor.methods({
       Meteor.users.update({_id: this.userId}, {$addToSet: {recentGames: gameName}});
     }
 
+  },
+  updateUserProfile: function(username, email){
+    check(username, String);
+
+    if (!this.userId){
+      throw new Meteor.Error(422, 'You are not authorized to make this change. Make sure you are logged in.');
+    }
+
+    var existingUsername = Meteor.users.findOne({username: username});
+
+    if (existingUsername && existingUsername._id !== this.userId ){
+      throw new Meteor.Error(422, 'That username is already taken. Try again.');
+    }
+
+    var existingEmail = Meteor.users.findOne({'emails.address': email});
+
+    if (existingEmail && existingEmail._id !== this.userId){
+      throw new Meteor.Error(422, 'That email address is already taken. Try again.');
+    }
+
+    var newEmail = [{
+      address: email,
+      verified: false
+    }]
+
+    Meteor.users.update({_id: this.userId}, {$set: {username: username, emails:newEmail}});
   }
 })

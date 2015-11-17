@@ -28,6 +28,11 @@
 
 .logo{
   height: 100%;
+  overflow: visible;
+
+  path{
+    transform-origin: top left;
+  }
 }
 
 .action{

@@ -83,7 +83,7 @@ const DashboardPage = React.createClass({
 
 		if (games){
 			return(
-				<ul className={gameStyles.list}>
+				<ul>
 				{games.map( game => {
 					return(
 						<li className={gameStyles.inline_item}>

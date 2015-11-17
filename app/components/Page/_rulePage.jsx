@@ -40,7 +40,11 @@ const RulePage = React.createClass({
 
     if (this.data.loading){
       return(
-        <Loading/>
+				<Page>
+					<PageContent>
+						<Loading/>
+					</PageContent>
+				</Page>
       )
     } else {
   		return (

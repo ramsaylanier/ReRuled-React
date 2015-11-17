@@ -31,6 +31,20 @@ FlowRouter.route('/login', {
 	}
 });
 
+FlowRouter.route('/profile', {
+	triggersEnter: [function(context, redirect){
+		if (!Meteor.userId()){
+			redirect('/login');
+		}
+	}],
+	action: function(){
+		ReactDOM.render(
+			<Root view={<Page.ProfilePage/>}/>,
+			document.getElementById('react-root')
+		)
+	}
+});
+
 FlowRouter.route('/register', {
 	action: function(){
 		ReactDOM.render(

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import styles from './alerts.scss';
 
 const AlertsComponent = React.createClass({
@@ -36,7 +37,7 @@ const Alert = React.createClass({
 	componentDidMount(){
 		var self = this;
 		let alertId = this.props.alert._id;
-		let alert = React.findDOMNode(this.refs.alert);
+		let alert = this.refs.alert;
 		Meteor.setTimeout(function(){
 			TweenMax.to(alert, 1, {
 				opacity: 0
@@ -50,12 +51,11 @@ const Alert = React.createClass({
 
 	removeAlert(){
 		Alerts.collection.update(this.props.alert._id, {$set: {seen: true}});
-		var alert = React.findDOMNode(this.refs.alert);
-		React.unmountComponentAtNode(alert);
+		var alert = this.refs.alert;
+		ReactDOM.unmountComponentAtNode(alert);
 	},
 
 	render(){
-		console.log(this.props);
 		let alert = this.props.alert;
     let className = styles[this.props.alert.type];
 		return(

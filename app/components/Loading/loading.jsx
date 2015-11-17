@@ -11,27 +11,28 @@ const Loading = React.createClass({
     console.log($(container));
     let left = $(container).find('.left-r');
     let right = $(container).find('.right-r');
-    let dX = 0;
-    let dY = 15;
+    let dX = -15;
+    let dY = -15;
     let rotation = 0;
+    let duration = .5;
 
     console.log(right);
-    TweenMax.to(left, .35, {
+    TweenMax.to(left, duration, {
       x: dX,
       y: dY,
       rotation: rotation,
       repeat: 10,
       yoyo: true,
-      ease:Power4.easeOutQuant
+      ease:Power4.easeInOutQuant
     })
 
-    TweenMax.to(right, .35, {
+    TweenMax.to(right, duration, {
       x: -dX,
       y: -dY,
       rotation: -rotation,
       repeat: 10,
       yoyo: true,
-      ease:Power4.easeOutQuant
+      ease:Power4.easeInOutQuant
     })
   },
 
