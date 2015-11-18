@@ -41,20 +41,17 @@ Meteor.methods({
 		let index = 0;
 		while (index < 800){
 			index++;
-			HTTP.get('https://boardgamegeek.com/browse/boardgame/page/' + index, function(err, res){
-				// console.log(cheerio);
-				console.log(res.statusCode)
+			HTTP.get('https://boardgamegeek.com/browse/boardgame/page/' + index, (err, res) => {
 				if (res.statusCode === 200){
-					var $ = cheerio.load(res.content);
+					let $ = cheerio.load(res.content);
 					let scrapedGames = $('.collection_objectname').find('a');
 
 					_.each(scrapedGames, (game, index) => {
 						let title = $(game).text();
-						console.log(title);
 						Games.update({title: title}, {$set: {title: title}}, {upsert: true})
 					})
 				}
-			})
+			});
 		}
 	}
 });

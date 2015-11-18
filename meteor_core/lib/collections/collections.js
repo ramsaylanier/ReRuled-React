@@ -4,10 +4,11 @@ Rulesets = new Mongo.Collection('rulesets');
 
 
 Meteor.methods({
-  createRule: function(name, description, game){
+  createRule: function(name, description, category, game){
     check(name, String);
     check(description, String);
     check(game, String);
+    check(category, String);
 
     if (!this.userId){
       throw new Meteor.Error(422, 'You must be logged in to create a rule');
@@ -16,7 +17,7 @@ Meteor.methods({
     var creator = this.userId;
     var creatorName = Meteor.users.findOne(this.userId).username;
 
-    var ruleId = Rules.insert({name: name, description: description, game: game, creator: creator, creatorName: creatorName});
+    var ruleId = Rules.insert({name: name, description: description, category: category, game: game, creator: creator, creatorName: creatorName});
 
     Meteor.call('addGameToUser', game);
     return ruleId;

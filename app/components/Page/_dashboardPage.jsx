@@ -27,8 +27,6 @@ const DashboardPage = React.createClass({
 		let rulesSub = Meteor.subscribe('userRulesByGameId', currentGame);
 		let rulesetSub = Meteor.subscribe('userRulesetsByGameId', currentGame);
 
-		console.log(currentGame);
-
 		return {
 			userLoading: !userSub.ready(),
 			rulesLoading: !rulesSub.ready(),
@@ -60,7 +58,7 @@ const DashboardPage = React.createClass({
 						<PageContent>
 							<header className={gameStyles.header}>
 								<h3>My Rulebook</h3>
-
+								<GameActions {...this.props} />
 								{this._showGamesList()}
 
 								<GameFilters {...this.props} />
@@ -103,26 +101,20 @@ const DashboardPage = React.createClass({
 
 	_showGamesContent(){
 		let content = FlowRouter.getQueryParam('content');
-		if (content === 'rulesets'){
-			if (this.data.rulesetsLoading){
-				return(
-					<Loading/>
-				)
-			} else {
-				return(
-					<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
-				)
-			}
+
+		if (this.data.rulesetsLoading || this.data.rulesLoading) {
+			return (
+				<Loading/>
+			)
+		}
+		else if (content === 'rulesets'){
+			return(
+				<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
+			)
 		} else {
-			if (this.data.rulesLoading){
-				return(
-					<Loading/>
-				)
-			} else {
-				return (
-					<RulesList rules={this.data.rules} public={true} {...this.props}/>
-				)
-			}
+			return (
+				<RulesList rules={this.data.rules} public={true} {...this.props}/>
+			)
 		}
 	}
 

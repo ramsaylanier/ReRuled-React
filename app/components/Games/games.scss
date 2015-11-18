@@ -95,6 +95,22 @@
   &:not(:last-of-type){
     border-right: 1px solid $dark;
   }
+
+  &:hover{
+    color: $primary;
+
+    svg{
+      transform: translateY(3px);
+
+      path{
+        fill: $primary;
+      }
+    }
+  }
+
+  svg{
+    transition: transform 300ms ease-out;
+  }
 }
 
 .filter_active{
@@ -102,7 +118,6 @@
 
   svg{
     transform: translateY(3px);
-    transition: transform 300ms ease-out;
 
     path{
       fill: $primary;

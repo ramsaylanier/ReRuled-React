@@ -45,6 +45,12 @@
 	}
 }
 
+.select{
+	padding: .5rem;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
 .text, .password, .url, .email{
 	composes: field;
 }

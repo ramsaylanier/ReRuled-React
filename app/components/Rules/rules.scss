@@ -19,19 +19,23 @@
 
   span{
     margin-left: 1rem;
-    
+
   }
 }
 
 .title{
   font-family: $sansSerif;
-  font-weight: 700;
-  color: $primary;
-  margin-bottom: .5rem;
+  font-size: .9rem;
+  margin-bottom: .75rem;
   display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   a{
+    display: inline-block;
     color: $primary;
+    text-decoration: underline;
   }
 }
 
@@ -39,27 +43,81 @@
   position: relative;
   padding: .5rem;
   background-color: darken(white, 5%);
-  overflow: hidden;
+  border-width: 1px 1px 1px 5px;
+  border-style: solid;
+  // overflow: hidden;
 
   &:not(:last-of-type){
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
   }
 
   &:hover{
     .actions{
-      transform: translateY(60px);
+      transform: translateX(-30px);
       opacity: 1;
       transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 0ms;
+    }
+  }
+
+  &.movement{
+    border-color: $primary;
+    .title{
+      a{
+        color: $primary;
+      }
+    }
+
+    svg path{
+      fill: $primary;
+    }
+  }
+
+  &.endgame{
+    border-color: $secondary;
+    .title{
+      a{
+        color: $secondary;
+      }
+    }
+
+    svg path{
+      fill: $secondary;
+    }
+  }
+
+  &.gameplay{
+    border-color: $tertiary;
+    .title a{
+      color: $tertiary;
+    }
+
+    svg path{
+      fill: $tertiary;
+    }
+  }
+
+  &.setup{
+    border-color: $quaternary;
+    .title a{
+      color: $quaternary;
+    }
+
+    svg path{
+      fill: $quaternary;
     }
   }
 }
 
 .actions{
   position: absolute;
-  top: -50px;
-  right: 20px;
+  top: 10px;
+  left: 0px;
   opacity: 0;
   transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 300ms;
+
+  button{
+    display: block;
+  }
 }
 
 .rule{
@@ -68,12 +126,12 @@
 
 .creator{
   font-size: .7rem;
+  color: $dark;
+  margin-left: 1rem;
 }
 
 .description{
   margin: 0;
-  line-height: 1.5rem;
-  padding: .5rem;
   background: darken(white, 5%);
 }
 
@@ -92,6 +150,38 @@
   display: inline-block;
   margin-bottom: 1rem;
 }
+
+.category{
+  position: absolute;
+  bottom: 0;
+  right: -1px;
+  padding: .25rem;
+  color: white;
+  border-radius: 1px;
+  font-size: .8rem;
+  border: 1px solid;
+
+  &.movement{
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &.endgame{
+    background-color: $secondary;
+    border-color: $secondary;
+  }
+
+  &.gameplay{
+    background-color: $tertiary;
+    border-color: $tertiary;
+  }
+
+  &.setup{
+    background-color: $quaternary;
+    border-color: $quaternary;
+  }
+}
+
 
 // ******************************************
 // ************** RULESETS ******************

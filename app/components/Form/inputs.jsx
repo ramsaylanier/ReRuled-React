@@ -68,12 +68,27 @@ const InputType = React.createClass({
 			inputClassNames.push('form__' + className);
 		});
 
-		return (
-			<div className={controlClassName} ref="formControl">
+		if (this.props.type === 'select'){
+			let options = this.props.options;
+			return(
+				<div className={controlClassName} ref="formControl">
+					{this._label()}
+					<select ref="input" {...this.props} className={inputClassNames.join(' ')} value={value} onFocus={this.activateField} onBlur={this.deactivateField}>
+						{options.map(option =>{
+							return(
+								<option value={option}>{option}</option>
+							)
+						})}
+					</select>
+				</div>
+			)
+		} else {
+			return (
+				<div className={controlClassName} ref="formControl">
 					{this._label()}
 
 					{isTextArea ?
-						<textarea ref="input" {...this.props} className={inputClassNames.join(' ')} value={value} onChange={onChange}>
+						<textarea ref="input" {...this.props} className={inputClassNames.join(' ')} value={value} onFocus={this.activateField} onBlur={this.deactivateField} onChange={onChange}>
 							{value}
 						</textarea> :
 						<input ref="input"
@@ -91,8 +106,9 @@ const InputType = React.createClass({
 					}
 
 					{this._overlay()}
-			</div>
-		)
+				</div>
+			)
+		}
 	},
 
 	_label(){

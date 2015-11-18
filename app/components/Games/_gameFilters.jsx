@@ -29,6 +29,15 @@ const GameFilters = React.createClass({
     rulesetFilter.addClass(styles.filter_active);
   },
 
+  componentDidMount(){
+    let contentQuery = FlowRouter.getQueryParam('content');
+    if (contentQuery == undefined || contentQuery == 'rules' ){
+      this._setContentToRules();
+    } else {
+      this._setContentToRulesets();
+    }
+  },
+
   render(){
 
     return(

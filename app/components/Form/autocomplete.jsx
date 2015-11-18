@@ -7,7 +7,7 @@ import autocompleteStyles from './autocomplete.scss'
 const AutocompleteField = React.createClass({
 
 	getInitialState(){
-		return {value: this.props.value}}
+		return {value: this.props.value}
 	},
 
 	handleChange(e){

@@ -32,6 +32,13 @@
 
   path{
     transform-origin: top left;
+    &:first-of-type{
+      fill: $primary;
+    }
+
+    &:last-of-type{
+      fill: $secondary;
+    }
   }
 }
 

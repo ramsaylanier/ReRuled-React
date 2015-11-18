@@ -35,11 +35,12 @@ const RuleItem = React.createClass({
 
   render(){
     let rule = this.props.rule;
+    let category = rule.category;
     let isCreator = this.props.rule.creator === Meteor.userId();
 
     return(
-      <li ref="item" className={styles.rule}>
-        <h5 className={styles.title}><a href={"/rules/" + rule._id}>{rule.name}</a></h5>
+      <li ref="item" className={styles.rule + ' ' + styles[category]}>
+        <h5 className={styles.title}><a href={"/rules/" + rule._id}>{rule.name}</a>{this._showCreator()} </h5>
 
         {isCreator &&
         <div ref="actions" className={styles.actions}>
@@ -49,8 +50,9 @@ const RuleItem = React.createClass({
         }
 
         <div className={styles.meta}>
-          {this._showCreator()}
           {this._showExcerpt()}
+
+          <span className={styles.category + ' ' + styles[category]}>{category}</span>
         </div>
       </li>
     )
@@ -82,14 +84,14 @@ const RuleItem = React.createClass({
     let rule = this.props.rule;
     if (Meteor.userId() !== rule.creator){
       return(
-        <p className={styles.creator}>by: {rule.creatorName}</p>
+        <span className={styles.creator}>by {rule.creatorName}</span>
       )
     }
   },
 
   _showExcerpt(){
     if (!this.props.hideExcerpt){
-      let excerptLength = this.props.excerptLength || 50;
+      let excerptLength = this.props.excerptLength || 100;
       let excerpt = this.props.rule.description.substr(0, excerptLength);
 
       return(
@@ -98,12 +100,20 @@ const RuleItem = React.createClass({
     }
   },
 
+  _showCategory(){
+    let category = this.props.rule.category;
+    if (category){
+      return(
+        <span className={styles[category]}>{category}</span>
+      )
+    }
+  },
   _showActions(e){
     let buttons = $(this.refs.actions).children('.button__icon');
 
     if (buttons.length){
       TweenMax.to(this.refs.actions, 0, {
-        y: 60,
+        y: 90,
         ease: Power4.easeOut
       })
 
@@ -122,7 +132,7 @@ const RuleItem = React.createClass({
 
     if (buttons.length){
       TweenMax.to(this.refs.actions, 0, {
-        y: 0,
+        x: 0,
         ease: Power4.easeOut
       })
 
