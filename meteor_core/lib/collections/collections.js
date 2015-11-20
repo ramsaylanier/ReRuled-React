@@ -4,22 +4,31 @@ Rulesets = new Mongo.Collection('rulesets');
 
 
 Meteor.methods({
-  createRule: function(name, description, category, game){
-    check(name, String);
-    check(description, String);
-    check(game, String);
-    check(category, String);
+  createRule: function(rule, rulesetId){
+    check(rule, {
+      name: String,
+      description: String,
+      game: String,
+      category: String
+    })
 
     if (!this.userId){
       throw new Meteor.Error(422, 'You must be logged in to create a rule');
     }
 
-    var creator = this.userId;
-    var creatorName = Meteor.users.findOne(this.userId).username;
+    rule.creator = this.userId;
+    rule.creatorName = Meteor.users.findOne(this.userId).username;
+    rule.createdOn = new Date();
 
-    var ruleId = Rules.insert({name: name, description: description, category: category, game: game, creator: creator, creatorName: creatorName});
+    var ruleId = Rules.insert(rule);
 
-    Meteor.call('addGameToUser', game);
+    Meteor.call('addGameToUser', rule.game);
+
+    if (rulesetId !== undefined && rulesetId !== 'none'){
+      var newRule = Rules.findOne({_id: ruleId}, {fields: {createdOn: 0}});
+      console.log('newRule:', newRule);
+      Meteor.call('addRuleToRuleset', newRule, rulesetId);
+    }
     return ruleId;
   },
   deleteRule: function(ruleId, creatorId){
@@ -47,6 +56,7 @@ Meteor.methods({
 
     ruleset.creator = creator;
     ruleset.creatorName = creatorName;
+    ruleset.createdOn = new Date();
 
     var rulesetId = Rulesets.insert(ruleset);
 
@@ -54,13 +64,11 @@ Meteor.methods({
     return rulesetId;
   },
   addRuleToRuleset: function(rule, rulesetId){
-    console.log(rule);
-
     check( rule, {
       _id: String,
       name: String,
       description: String,
-      category: Match.Optional([String]),
+      category: String,
       creator: String,
       creatorName: String,
       game: String

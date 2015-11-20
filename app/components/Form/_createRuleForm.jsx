@@ -4,15 +4,32 @@ import { Alerts } from '../Alerts/alert.jsx';
 
 import { animateModalOut } from '../Modal/modalAnimations.js';
 
-let ruleCategories = [
-  'movement', 'gameplay', 'setup', 'endgame', 'other'
-]
+let ruleCategories = () => {
+  return [
+    {value:'movement', text: 'movement'},
+    {value:'gameplay', text: 'gameplay'},
+    {value:'setup', text: 'setup'},
+    {value:'endgame', text: 'other'}
+  ]
+}
+
+let rulesets = () => {
+  let rulesets = Rulesets.find().fetch();
+  rulesets = _.map(rulesets, function(ruleset){
+    return {value: ruleset._id, text: ruleset.name}
+  })
+
+  rulesets.unshift({value: null, text: 'none'})
+
+  return rulesets;
+}
 
 let attributes = {
   fields: [
     {type: 'text', label: 'Rule Name', name: 'rule-name', className:['field','full']},
     {type: 'textarea', label: 'Rule Description', name: 'rule-description', className:['field','full']},
     {type: 'select', label: 'Category', name: 'rule-category', options: ruleCategories, className: ['field', 'full']},
+    {type: 'select', label: 'Rulesets', name: 'rule-ruleset', options: rulesets, className: ['field', 'full']},
     {type: 'submit', value: 'Create Rule', className: ['submit','full']}
   ],
   type: 'create-rule-form',
@@ -31,26 +48,28 @@ const CreateRuleForm = React.createClass({
     e.preventDefault();
     let setCurrentModal = this.props.actions.setCurrentModal;
 
-    let name = $(e.target).find('[name="rule-name"]').val();
-    let description = $(e.target).find('[name="rule-description"]').val();
-    let category = $(e.target).find('[name="rule-category"]').val();
-    let game = this.props.currentGame;
+    let rule = {
+      name: $(e.target).find('[name="rule-name"]').val(),
+      description: $(e.target).find('[name="rule-description"]').val(),
+      game: this.props.currentGame,
+      category: $(e.target).find('[name="rule-category"]').val()
+    }
 
-    console.log('category:', category)
+    let rulesetId = $(e.target).find('[name="rule-ruleset"]').val();
 
-    if (!name)
+    if (!rule.name)
       Alerts.throw("Please enter a name for your rule.", 'error');
 
-    else if (!description)
+    else if (!rule.description)
       Alerts.throw("Please enter a description for your rule.", 'error');
 
-    else if (!category)
+    else if (!rule.category)
       Alerts.throw("Please select a category for your rule.", 'error');
 
-    else (
-      Meteor.call('createRule', name, description, category, game, function(err, res){
+    else {
+      Meteor.call('createRule', rule, rulesetId, function(err, res){
         if (err){
-          Alerts.throw(err.reasons, 'error')
+          Alerts.throw(err.reason, 'error')
         } else {
           animateModalOut();
           setTimeout( () => {
@@ -58,7 +77,7 @@ const CreateRuleForm = React.createClass({
           }, 500);
         }
       })
-    )
+    }
   }
 });
 

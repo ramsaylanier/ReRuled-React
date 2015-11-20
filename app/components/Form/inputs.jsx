@@ -10,8 +10,8 @@ const InputType = React.createClass({
 	},
 
 	componentDidMount(){
-		let input = $(ReactDOM.findDOMNode(this.refs.input));
-		let label = $(ReactDOM.findDOMNode(this.refs.label));
+		let input = $(this.refs.input);
+		let label = $(this.refs.label);
 
 		if (!input.length || !label.length){
 			return false;
@@ -69,14 +69,14 @@ const InputType = React.createClass({
 		});
 
 		if (this.props.type === 'select'){
-			let options = this.props.options;
+			let options = this.props.options();
 			return(
 				<div className={controlClassName} ref="formControl">
 					{this._label()}
 					<select ref="input" {...this.props} className={inputClassNames.join(' ')} value={value} onFocus={this.activateField} onBlur={this.deactivateField}>
 						{options.map(option =>{
 							return(
-								<option value={option}>{option}</option>
+								<option value={option.value}>{option.text}</option>
 							)
 						})}
 					</select>

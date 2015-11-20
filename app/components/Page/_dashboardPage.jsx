@@ -31,8 +31,18 @@ const DashboardPage = React.createClass({
 			userLoading: !userSub.ready(),
 			rulesLoading: !rulesSub.ready(),
 			rulesetsLoading: !rulesetSub.ready(),
-			rules: Rules.find({game: currentGame, creator: Meteor.userId()}).fetch(),
-			rulesets: Rulesets.find({game: currentGame, creator: Meteor.userId()}).fetch()
+			rules: Rules.find({
+				game: currentGame,
+				creator: Meteor.userId()
+			},{
+				sort: { createdOn: 1}
+			}).fetch(),
+			rulesets: Rulesets.find({
+				game: currentGame,
+				creator: Meteor.userId()
+			},{
+				sort: { createdOn: 1 }
+			}).fetch()
 		}
 	},
 
@@ -58,7 +68,10 @@ const DashboardPage = React.createClass({
 						<PageContent>
 							<header className={gameStyles.header}>
 								<h3>My Rulebook</h3>
+
+								{currentGame &&
 								<GameActions {...this.props} />
+								}
 								{this._showGamesList()}
 
 								<GameFilters {...this.props} />
