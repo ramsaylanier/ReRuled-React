@@ -33,6 +33,10 @@
 	max-width: 750px;
 }
 
+.full{
+	max-width: 100%;	
+}
+
 .flex{
 	composes: main;
 	display: flex;

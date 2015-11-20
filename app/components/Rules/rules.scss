@@ -25,12 +25,10 @@
 
 .title{
   font-family: $sansSerif;
-  font-size: .9rem;
+  // font-size: 2.1rem;
   margin-bottom: .75rem;
   display: inline-block;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  transition: transform 200ms ease-out;
 
   a{
     display: inline-block;
@@ -43,9 +41,8 @@
   position: relative;
   padding: .5rem;
   background-color: darken(white, 5%);
-  border-width: 1px 1px 1px 5px;
   border-style: solid;
-  // overflow: hidden;
+  overflow: hidden;
 
   &:not(:last-of-type){
     margin-bottom: 1rem;
@@ -53,75 +50,84 @@
 
   &:hover{
     .actions{
-      transform: translateX(-30px);
-      opacity: 1;
-      transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 0ms;
+      transform: translateX(0px);
+    }
+
+    .title, .description{
+      transform: translateX(30px);
     }
   }
 
   &.movement{
-    border-color: $primary;
     .title{
       a{
         color: $primary;
       }
     }
 
-    svg path{
-      fill: $primary;
+    .actions{
+      background-color: $primary;
     }
   }
 
   &.endgame{
-    border-color: $secondary;
+    .actions{
+      background-color: $secondary;
+    }
     .title{
       a{
         color: $secondary;
       }
     }
-
-    svg path{
-      fill: $secondary;
-    }
   }
 
   &.gameplay{
-    border-color: $tertiary;
+    .actions{
+      background-color: $tertiary;
+    }
     .title a{
       color: $tertiary;
-    }
-
-    svg path{
-      fill: $tertiary;
     }
   }
 
   &.setup{
-    border-color: $quaternary;
     .title a{
       color: $quaternary;
     }
 
-    svg path{
-      fill: $quaternary;
+    .actions{
+      background-color: $quaternary;
     }
   }
 }
 
 .actions{
   position: absolute;
-  top: 10px;
+  height: 100%;
+  width: 30px;
+  top: 0px;
   left: 0px;
-  opacity: 0;
-  transition: opacity 150ms ease-out 0ms, transform 0ms ease-out 300ms;
+  z-index: 1000;
+  transform: translateX(-25px);
+  transition: transform 200ms ease-out;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
 
   button{
     display: block;
+  }
+
+  svg{
+    path{
+      fill: white;
+    }
   }
 }
 
 .rule{
   composes: item;
+  padding-left: 1.5rem;
 }
 
 .creator{
@@ -133,6 +139,7 @@
 .description{
   margin: 0;
   background: darken(white, 5%);
+  transition: transform 200ms ease-out;
 }
 
 .link{
@@ -142,6 +149,10 @@
   &:hover{
     color: $primary;
   }
+}
+
+.meta{
+  transition: transform 200ms ease-out;
 }
 
 .game_link{

@@ -107,40 +107,6 @@ const RuleItem = React.createClass({
         <span className={styles[category]}>{category}</span>
       )
     }
-  },
-  _showActions(e){
-    let buttons = $(this.refs.actions).children('.button__icon');
-
-    if (buttons.length){
-      TweenMax.to(this.refs.actions, 0, {
-        y: 90,
-        ease: Power4.easeOut
-      })
-
-      TweenMax.staggerFromTo(buttons, 1, {
-        opacity: 0
-      },{
-        opacity: 1,
-        ease: Power4.easeOut,
-      }, 0)
-    }
-  },
-
-  _hideActions(){
-
-    let buttons = $(this.refs.actions).children('.button__icon');
-
-    if (buttons.length){
-      TweenMax.to(this.refs.actions, 0, {
-        x: 0,
-        ease: Power4.easeOut
-      })
-
-      TweenMax.staggerTo(buttons, 1, {
-        opacity: 0,
-        ease: Power4.easeOut
-      }, .1)
-    }
   }
 });
 

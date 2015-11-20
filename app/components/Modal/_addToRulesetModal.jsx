@@ -14,7 +14,7 @@ const AddToRulesetModal = React.createClass({
     let rule = this.props.currentRule;
 
     return{
-      rule: Rules.findOne(rule)
+      rule: Rules.findOne(rule, {fields: {createdOn: 0}})
     }
   },
 

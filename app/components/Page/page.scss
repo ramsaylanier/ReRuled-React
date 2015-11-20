@@ -11,49 +11,6 @@
 	transition: opacity 300ms ease-out;
 }
 
-.overlay{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 200vw;
-	height: 100%;
-	opacity: 0;
-	background-color: fade-out($dark, .2);
-}
-
-.live{
-	composes: base;
-	height: 100vh;
-	overflow: hidden;
-
-	.hero{
-		max-height: 0vh;
-		overflow: hidden;
-		padding: 0rem;
-	}
-
-	.content{
-		height: 100%;
-		padding-top: 1.5rem;
-	}
-}
-
-
-.hero{
-	background-color: white;
-	background-size: cover;
-	background-position: center center;
-	transition: all 300ms ease-out;
-	max-height: 100vh;
-	padding: .5rem;
-}
-
-.hero__content{
-	background-color: fade-out(white, .2);
-	padding: 1rem;
-	margin: 2rem 0rem;
-}
-
 .content{
 	padding: 2rem 0rem;
 
@@ -64,10 +21,12 @@
 
 .header{
 	position: relative;
-	background-size: cover;
-	background-position: center center;
-	min-height: 50vh;
-	text-align: center;
+	background-color: white;
+	padding: 2rem 0rem;
+
+	.link{
+		color: $primary;
+	}
 }
 
 
@@ -78,29 +37,4 @@
 	font-size: 2rem;
 	padding: 1rem 0rem;
 	margin-bottom: 0rem;
-}
-
-.section{
-	padding: 2rem 0rem;
-	background-color: $dark;
-	transform-origin: top center;
-
-	.section-title{
-		font-weight: 900;
-	}
-}
-
-.separator{
-	position: relative;
-	width: 100%;
-	max-width: 200px;
-	height: 2px;
-	background-color: $primary;
-	border-radius: 3px;
-	margin: 2rem auto 0rem auto;
-}
-
-.slide-down-container{
-	height: 0;
-	overflow: hidden;
 }

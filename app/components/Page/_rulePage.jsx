@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 //components
-import { Page, PageContent } from '../Page/page.jsx';
+import { Page, PageContent, PageHeader, PageTitle } from '../Page/page.jsx';
 import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
@@ -12,7 +12,7 @@ import { Alerts } from '../Alerts/alert.jsx';
 
 //styles
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
-import styles from '../Rules/rules.scss';
+import styles from '../Page/page.scss';
 
 
 const RulePage = React.createClass({
@@ -47,15 +47,17 @@ const RulePage = React.createClass({
 				</Page>
       )
     } else {
+
+			let category = rule.category;
+
   		return (
   			<div className={wrapperStyles.page}>
-  				<Page>
+  				<Page className={styles[category]}>
+						<PageHeader wrapperType="tight">
+							<PageTitle className={styles.title}>{rule.name}</PageTitle>
+							<a href={"/games/" + rule.game} className={styles.link}>{rule.game}</a>
+						</PageHeader>
   					<PageContent wrapperType="tight">
-  						<header className={styles.header}>
-                <h3 className={styles.title}>{rule.name}</h3>
-                <h5><a href={"/games/" + rule.game} className={styles.game_link}>{rule.game}</a></h5>
-  						</header>
-
   						<div className={styles.container}>
                 <p className={styles.description}>{rule.description}</p>
   						</div>

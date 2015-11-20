@@ -32,19 +32,35 @@ const Page = React.createClass({
 		};
 
 		return(
-				<div ref="page" className={className} style={bg}>
+				<div ref="page" className={styles.base + ' ' + className} style={bg}>
 					{children}
 				</div>
 		)
 	}
 });
 
+const PageContent = React.createClass({
+	render(){
+
+		let className = styles.content;
+		let wrapperClassName = wrapperStyles[this.props.wrapperType] || wrapperStyles.main;
+
+		return(
+			<div className={className}>
+				<div className={wrapperClassName}>
+					{this.props.children}
+				</div>
+			</div>
+		)
+	}
+})
+
 const PageHero = React.createClass({
 	render(){
 
 		let className = styles.hero;
 		let contentClassName = styles.hero__content;
-		let wrapperClassName = wrapperStyles.main;
+		let wrapperClassName = wrapperStyles[this.props.wrapperType] || wrapperStyles.main;
 		var heroImage = this.props.heroImage || null;
 
 		var style = {
@@ -67,13 +83,17 @@ const PageHeader = React.createClass({
 
 	render: function(){
 
+		let wrapperClassName = wrapperStyles[this.props.wrapperType] || wrapperStyles.main;
+
 		var bg = this.props.backgroundImage && {
 			backgroundImage: "url('" + this.props.backgroundImage + "')",
 		};
 
 		return (
-			<div className="page-header" style={bg}>
-				{this.props.children}
+			<div className={styles.header} style={bg}>
+				<div className={wrapperClassName}>
+					{this.props.children}
+				</div>
 			</div>
 		)
 	}
@@ -85,26 +105,10 @@ const PageTitle = React.createClass({
 		let className = styles.title;
 
 		return (
-			<h1 className={className}>{this.props.children}</h1>
+			<h2 className={className}>{this.props.children}</h2>
 		)
 	}
 });
-
-const PageContent = React.createClass({
-	render(){
-
-		let className = styles.content;
-		let wrapperClassName = wrapperStyles[this.props.wrapperType] || wrapperStyles.main;
-
-		return(
-			<div className={className}>
-				<div className={wrapperClassName}>
-					{this.props.children}
-				</div>
-			</div>
-		)
-	}
-})
 
 const PageSection = React.createClass({
 	render:function(){

@@ -35,7 +35,7 @@ const DashboardPage = React.createClass({
 				game: currentGame,
 				creator: Meteor.userId()
 			},{
-				sort: { createdOn: 1}
+				sort: { createdOn: -1}
 			}).fetch(),
 			rulesets: Rulesets.find({
 				game: currentGame,

@@ -9,7 +9,8 @@ let ruleCategories = () => {
     {value:'movement', text: 'movement'},
     {value:'gameplay', text: 'gameplay'},
     {value:'setup', text: 'setup'},
-    {value:'endgame', text: 'other'}
+    {value:'endgame', text: 'endgame'},
+    {value:'other', text: 'other'}
   ]
 }
 
@@ -27,7 +28,7 @@ let rulesets = () => {
 let attributes = {
   fields: [
     {type: 'text', label: 'Rule Name', name: 'rule-name', className:['field','full']},
-    {type: 'textarea', label: 'Rule Description', name: 'rule-description', className:['field','full']},
+    {type: 'textarea', label: 'Rule Description', name: 'rule-description', rows: 8, className:['field','full']},
     {type: 'select', label: 'Category', name: 'rule-category', options: ruleCategories, className: ['field', 'full']},
     {type: 'select', label: 'Rulesets', name: 'rule-ruleset', options: rulesets, className: ['field', 'full']},
     {type: 'submit', value: 'Create Rule', className: ['submit','full']}
