@@ -8,7 +8,6 @@ const Loading = React.createClass({
   componentDidMount(){
     let count = 0;
     let container = this.container;
-    console.log($(container));
     let left = $(container).find('.left-r');
     let right = $(container).find('.right-r');
     let dX = -15;
@@ -16,7 +15,6 @@ const Loading = React.createClass({
     let rotation = 0;
     let duration = .5;
 
-    console.log(right);
     TweenMax.to(left, duration, {
       x: dX,
       y: dY,
@@ -37,7 +35,6 @@ const Loading = React.createClass({
   },
 
   componentWillUnmount(){
-    console.log('unmounting');
     TweenMax.killTweensOf(this.container);
   },
 

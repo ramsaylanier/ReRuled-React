@@ -8,16 +8,16 @@ import * as ReruledActions from '../actions/index'
 import "./app.scss";
 import styles from '../components/Header/header.scss';
 
- class App extends Component {
+class App extends Component {
 
-   constructor(props){
-     super();
-     this._currentModal = this._currentModal.bind(this);
-   }
+  constructor(props){
+    super();
+    this._currentModal = this._currentModal.bind(this);
+  }
 
   render() {
     const { currentModal, currentGame, actions } = this.props
-    let view = React.cloneElement(this.props.view, this.props);
+    let view = React.cloneElement(this.props.children, this.props);
 
     return (
       <div className="application">
@@ -28,9 +28,7 @@ import styles from '../components/Header/header.scss';
         {view}
 
         {this._currentModal()}
-
       </div>
-
     )
   }
 
@@ -44,7 +42,9 @@ import styles from '../components/Header/header.scss';
 }
 
 function mapStateToProps(state) {
+  console.log('statez:', state.games);
   return {
+    path: state.routing.path,
     currentGame: state.games.currentGame,
     gameContent: state.games.gameContent,
     currentRule: state.rules.currentRule,

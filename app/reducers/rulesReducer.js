@@ -6,9 +6,6 @@ let initialState = {
 
 export default function rules(state = initialState, action){
 
-  console.log('action:', action);
-  console.log('state:', state);
-
   switch(action.type){
     case SET_CURRENT_RULESET:
       return Object.assign({}, state, {

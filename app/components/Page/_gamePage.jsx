@@ -21,7 +21,7 @@ const GamePage = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData(){
-		let currentGame = FlowRouter.getParam('game');
+		let currentGame = this.props.params.game;
 		let gameSub = Meteor.subscribe('currentGame', currentGame);
 		let rulesSub = Meteor.subscribe('rulesListByGameId', currentGame)
 		let rulesetsSub = Meteor.subscribe('rulesetsListByGameId', currentGame)
@@ -35,7 +35,7 @@ const GamePage = React.createClass({
 	},
 
   componentDidMount(){
-    let currentGame = FlowRouter.getParam('game');
+    let currentGame = this.props.params.game;
     this.props.actions.setCurrentGame(currentGame);
   },
 

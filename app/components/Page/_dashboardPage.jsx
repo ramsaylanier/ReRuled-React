@@ -113,7 +113,7 @@ const DashboardPage = React.createClass({
 	},
 
 	_showGamesContent(){
-		let content = FlowRouter.getQueryParam('content');
+		let content = this.props.gameContent;
 
 		if (this.data.rulesetsLoading || this.data.rulesLoading) {
 			return (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 
 import styles from './rules.scss';
 
@@ -40,7 +41,7 @@ const RuleItem = React.createClass({
 
     return(
       <li ref="item" className={styles.rule + ' ' + styles[category]}>
-        <h5 className={styles.title}><a href={"/rules/" + rule._id}>{rule.name}</a>{this._showCreator()} </h5>
+        <h5 className={styles.title}><Link to={"/rules/" + rule._id}>{rule.name}</Link>{this._showCreator()} </h5>
 
         {isCreator &&
         <div ref="actions" className={styles.actions}>
@@ -66,7 +67,6 @@ const RuleItem = React.createClass({
   },
 
   _deleteRule(e){
-    console.log(this.props);
     this.props.actions.setCurrentRule(this.props.rule);
     let ruleId = this.props.rule._id;
     let creatorId = this.props.rule.creator;

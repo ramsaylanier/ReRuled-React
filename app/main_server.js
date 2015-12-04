@@ -38,6 +38,7 @@ Meteor.methods({
 	},
 
   loadGames(){
+		console.log('loading games');
 		let index = 0;
 		while (index < 800){
 			index++;

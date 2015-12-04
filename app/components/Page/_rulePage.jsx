@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 //components
 import { Page, PageContent, PageHeader, PageTitle } from '../Page/page.jsx';
@@ -19,7 +20,7 @@ const RulePage = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData(){
-		let currentRule = FlowRouter.getParam('rule');
+		let currentRule = this.props.params.rule;
 		let ruleSub = Meteor.subscribe('currentRule', currentRule);
 
 		return {
@@ -29,7 +30,7 @@ const RulePage = React.createClass({
 	},
 
   componentDidMount(){
-    let currentRule = FlowRouter.getParam('game');
+    let currentRule = this.props.params.rule;
     this.props.actions.setCurrentRule(currentRule);
 		this.props.actions.setCurrentModal(null);
   },
@@ -55,7 +56,7 @@ const RulePage = React.createClass({
   				<Page className={styles[category]}>
 						<PageHeader wrapperType="tight">
 							<PageTitle className={styles.title}>{rule.name}</PageTitle>
-							<a href={"/games/" + rule.game} className={styles.link}>{rule.game}</a>
+							<Link to={"/games/" + rule.game} className={styles.link}>{rule.game}</Link>
 						</PageHeader>
   					<PageContent wrapperType="tight">
   						<div className={styles.container}>

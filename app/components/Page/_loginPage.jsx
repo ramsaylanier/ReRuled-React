@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 //components
+import { Link } from 'react-router';
 import { Page, PageContent } from '../Page/page.jsx';
 import LoginForm from '../Form/_loginForm.jsx';
 import Button from '../Button/button.jsx';
@@ -22,9 +23,9 @@ const LoginPage = React.createClass({
 					<div className={wrapperClassName}>
 						<LoginForm/>
 						<Button type="twitter" action={twitterLogin}>{TwitterIcon} Login With Twitter</Button>
-						<p>No account? <a href='/register' className="transition-link">Register</a></p>
+						<p>No account? <Link to='/register' className="transition-link">Register</Link></p>
 
-						<a className="small render-form" onClick={renderForgotPasswordForm}>Forgot password</a>
+						<Link className="small render-form" onClick={renderForgotPasswordForm}>Forgot password</Link>
 					</div>
 				</PageContent>
 			</Page>

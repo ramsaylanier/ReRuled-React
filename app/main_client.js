@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './router.jsx';
+import './index.jsx';
+
+// import './router.jsx';
 
 // import cheerio from 'cheerio';
 

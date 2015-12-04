@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import styles from './navs.scss';
 
 const NavList = React.createClass({
@@ -46,9 +47,9 @@ const NavItem = React.createClass({
 
 		return (
 			<li className={className} >
-				<a className={linkClassName} href={this.props.url}  onClick={this.props.clickFunction}>
+				<Link to={this.props.url} className={linkClassName} href={this.props.url}  onClick={this.props.clickFunction}>
 					{this.props.icon? this.props.icon : this.props.name}
-				</a>
+				</Link>
 
 				{ this.props.subnav && <SubNavList {...this.props.subnav}/> }
 			</li>

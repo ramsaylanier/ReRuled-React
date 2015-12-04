@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { updatePath } from 'redux-simple-router';
+
 import Button from '../Button/button.jsx';
 import styles from './games.scss';
 import { BookIcon, SetIcon } from '../Icons/icons.jsx';
 
-
 const GameFilters = React.createClass({
   _setContentToRules(){
+    // console.log(this.props);
     let ruleFilter = $(this.ruleFilter);
     let rulesetFilter = $(this.rulesetFilter);
 
-    FlowRouter.setQueryParams({content: 'rules'});
+    this.props.actions.updatePath(this.props.location.pathname + '?content=rules' );
     this.props.actions.setGameContentType('rules');
 
     ruleFilter.addClass(styles.filter_active);
@@ -22,7 +24,7 @@ const GameFilters = React.createClass({
     let ruleFilter = $(this.ruleFilter);
     let rulesetFilter = $(this.rulesetFilter);
 
-    FlowRouter.setQueryParams({content: 'rulesets'});
+    this.props.actions.updatePath(this.props.location.pathname + '?content=rulesets' );
     this.props.actions.setGameContentType('rulesets');
 
     ruleFilter.removeClass(styles.filter_active);
@@ -30,12 +32,14 @@ const GameFilters = React.createClass({
   },
 
   componentDidMount(){
-    let contentQuery = FlowRouter.getQueryParam('content');
-    if (contentQuery == undefined || contentQuery == 'rules' ){
-      this._setContentToRules();
-    } else {
-      this._setContentToRulesets();
-    }
+
+    // console.log(this.props.actions);
+    // let contentQuery = this.props.location.query.content;
+    // if (contentQuery == undefined || contentQuery == 'rules' ){
+    //   this._setContentToRules();
+    // } else {
+    //   this._setContentToRulesets();
+    // }
   },
 
   render(){

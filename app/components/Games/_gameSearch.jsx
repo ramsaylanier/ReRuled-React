@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
+import { updatePath } from 'redux-simple-router';
 import styles from './games.scss';
 import AutocompleteField from '../Form/autocomplete.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
@@ -69,8 +71,7 @@ const GameSearch = React.createClass({
 
     Meteor.setTimeout( () => {
       this.props.actions.setCurrentGame(gameName);
-      FlowRouter.setQueryParams({'game':gameName});
-      FlowRouter.go('/games/' + gameName);
+      this.props.actions.updatePath('/games/' + gameName);
 
       if (Meteor.userId()){
         Meteor.call('addGameToRecentGames', gameName, function(err, res){
@@ -94,7 +95,7 @@ const GameSearch = React.createClass({
               {recentGames.map( game => {
                 return(
                   <li className={styles.item}>
-                    <a className={styles.link} href={"/games/" + game}>{game}</a>
+                    <Link to={"/games/" + game} className={styles.link}>{game}</Link>
                   </li>
                 )
               })}
