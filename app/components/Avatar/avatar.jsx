@@ -9,7 +9,9 @@ const Avatar = React.createClass({
 		image.error(function(e){
 			Meteor.call('updateUserAvatar', function(err, res){
 				if (err){
+					console.log(err)
 				} else {
+					console.log(res)
 				}
 			})
 		})

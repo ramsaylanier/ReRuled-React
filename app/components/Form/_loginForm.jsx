@@ -20,11 +20,12 @@ const LoginForm = React.createClass({
 	},
 
 	_onSubmit(e){
-		console.log(e);
 		e.preventDefault();
 
-		var userName = $(e.target).find('[name="username"]').val();
-		var password = $(e.target).find('[name="password"]').val();
+		const afterSubmitAction = this.props.actions.updatePath;
+
+		let userName = $(e.target).find('[name="username"]').val();
+		let password = $(e.target).find('[name="password"]').val();
 
 		if (!userName){
 			Alerts.throw('Please enter a username', 'error');
@@ -46,8 +47,8 @@ const LoginForm = React.createClass({
 					ease: Power2.easeOut
 				})
 
-				Meteor.setTimeout(function(){
-					FlowRouter.go('/');
+				Meteor.setTimeout( () => {
+					afterSubmitAction('/');
 				}, 500);
 			}
 		})

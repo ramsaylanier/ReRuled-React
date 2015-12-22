@@ -42,9 +42,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('statez:', state.games);
+  console.log('statez:', state);
   return {
     path: state.routing.path,
+    currentUser: state.users.currentUser,
     currentGame: state.games.currentGame,
     gameContent: state.games.gameContent,
     currentRule: state.rules.currentRule,

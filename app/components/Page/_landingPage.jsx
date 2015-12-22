@@ -29,12 +29,17 @@ const LandingPage = React.createClass({
 	},
 
 	componentDidMount(){
-		console.log(this.props);
 		this.props.actions.setCurrentGame(null);
 	},
 
+	componentDidUpdate(){
+		console.log('updated')
+	},
+
 	render(){
-		// let games = this.data.games;
+
+
+		console.log('render');
 
 		if (this.data.loading){
 			return (
@@ -50,7 +55,7 @@ const LandingPage = React.createClass({
 					<Page>
 						<PageContent>
 							<header className={gameStyles.header}>
-								<GameSearch actions={this.props.actions} currentGame={this.props.currentGame}/>
+								<GameSearch actions={this.props.actions} currentGame={this.props.currentGame} currentUser={this.props.currentUser}/>
 							</header>
 						</PageContent>
 					</Page>

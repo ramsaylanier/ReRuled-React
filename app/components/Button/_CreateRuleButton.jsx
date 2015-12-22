@@ -4,17 +4,14 @@ import styles from './button.scss';
 import CreateRuleModal from '../Modal/_createRuleModal.jsx';
 import Button from './button.jsx';
 
-const CreateRuleButton = React.createClass({
-
-  handleClick(){
-    this.props.actions.setCurrentModal(<CreateRuleModal/>);
-  },
-
-  render(){
-    return(
-      <Button action={this.handleClick} type='primary'>Create New Rule</Button>
-    )
+const CreateRuleButton = (actions) => {
+  const handleClick = () => {
+    actions.setCurrentModal(<CreateRuleModal/>);
   }
-})
+
+  return(
+    <Button action={handleClick} type='primary'>Create New Rule</Button>
+  )
+}
 
 export default CreateRuleButton;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BackIcon, MenuIcon, SearchIcon } from '../Icons/icons.jsx';
+import LogoutButton from '../Button/_logoutButton.jsx';
 import Avatar from '../Avatar/avatar.jsx';
 
 const MobileNav = {
@@ -129,14 +130,7 @@ const PrimaryNav = {
   						{
   							id: 5,
   							url: '',
-  							name: 'logout',
-  							clickFunction: function(){
-  								Meteor.logout(function(error){
-  									if (!error){
-  										FlowRouter.go('/login');
-  									}
-  								});
-  							}
+  							name: <LogoutButton />
   						}
   					]
   				}

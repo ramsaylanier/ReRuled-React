@@ -8,3 +8,6 @@ export const SET_CURRENT_RULESET = "SET_CURRENT_RULESET";
 export const SET_CURRENT_MODAL = "SET_CURRENT_MODAL";
 
 export const UPDATE_PATH = "@@router/UPDATE_PATH";
+
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";

@@ -11,6 +11,7 @@ const Header = React.createClass({
 
 	getMeteorData(){
 		return{
+			loggingIn: Meteor.loggingIn(),
 			user: Meteor.userId()
 		}
 	},
@@ -25,9 +26,6 @@ const Header = React.createClass({
 		let logoLink = '/';
 		let className = styles.base;
 		let wrapperClassName = wrapperStyles.flex;
-		// let loggedIn = this.data.loggedIn;
-
-		console.log('data:', this.data);
 
 		return (
 			<header className={className}>
@@ -35,11 +33,13 @@ const Header = React.createClass({
 					<Link to={logoLink} className={styles.brand}>{LogoIcon}</Link>
 					<span ref="title" className={styles.title}>{this.props.title}</span>
 
-					{Navs.map( nav => {
-						if (nav.location == 'header'){
-							return <NavList key={nav.name} withUser={true} navItems={nav.navItems()} navType={nav.name}/>
-						}
-					})}
+					{!this.data.loggingIn &&
+						Navs.map( nav => {
+							if (nav.location == 'header'){
+								return <NavList key={nav.name} withUser={true} navItems={nav.navItems()} navType={nav.name}/>
+							}
+						})
+					}
 
 					{this.props.children}
 				</div>

@@ -22,40 +22,36 @@ const NavList = React.createClass({
 	}
 });
 
-const SubNavList = React.createClass({
-	render(){
-		let navItems = this.props.navItems;
-		let className = styles.subnav__list;
+const SubNavList = (props) => {
+	let navItems = props.navItems;
+	let className = styles.subnav__list;
 
-		return (
-			<ul className={className}>
-				{navItems.map((item) => {
-					return (
-						<NavItem key={item.name} {...item} subNavItem={true} />
-					)
-				})}
-			</ul>
-		)
-	}
-});
+	return (
+		<ul className={className}>
+			{navItems.map((item) => {
+				return (
+					<NavItem key={item.name} {...item} subNavItem={true} />
+				)
+			})}
+		</ul>
+	)
+}
 
-const NavItem = React.createClass({
-	render(){
-		let isSubNavItem = this.props.subNavItem;
-		let className = styles.item;
-		let linkClassName = styles.link;
+const NavItem = (props) =>{
+	let isSubNavItem = props.subNavItem;
+	let className = styles.item;
+	let linkClassName = styles.link;
 
-		return (
-			<li className={className} >
-				<Link to={this.props.url} className={linkClassName} href={this.props.url}  onClick={this.props.clickFunction}>
-					{this.props.icon? this.props.icon : this.props.name}
-				</Link>
+	return (
+		<li className={className} >
+			<Link to={props.url} className={linkClassName} href={props.url}  onClick={props.clickFunction}>
+				{props.icon? props.icon : props.name}
+			</Link>
 
-				{ this.props.subnav && <SubNavList {...this.props.subnav}/> }
-			</li>
-		)
-	}
-});
+			{ props.subnav && <SubNavList {...props.subnav}/> }
+		</li>
+	)
+}
 
 let Navs = [];
 

@@ -21,7 +21,7 @@ const LoginPage = React.createClass({
 			<Page>
 				<PageContent>
 					<div className={wrapperClassName}>
-						<LoginForm/>
+						<LoginForm {...this.props}/>
 						<Button type="twitter" action={twitterLogin}>{TwitterIcon} Login With Twitter</Button>
 						<p>No account? <Link to='/register' className="transition-link">Register</Link></p>
 

@@ -9,8 +9,8 @@ export default class GameActions extends Component{
   render(){
     return(
       <div className={styles.actions}>
-        <CreateRuleButton {...this.props}/>
-        <CreateRulesetButton {...this.props}/>
+        <CreateRuleButton {...this.props.actions}/>
+        <CreateRulesetButton {...this.props.actions}/>
       </div>
     )
   }

@@ -8,7 +8,6 @@ import configureStore from './store/store.js';
 import * as Page from './components/Page/Pages.js';
 import {syncReduxAndRouter } from 'redux-simple-router';
 
-
 let store = configureStore();
 const history = createBrowserHistory();
 
@@ -29,3 +28,23 @@ render((
     </Router>
   </Provider>
 ), document.getElementById('react-root'))
+
+
+Meteor.startup(() => {
+	Accounts.onLogin(function(){
+		var user = Meteor.user();
+
+		//Set the currentUser in redux store
+		var action = {
+			type: 'SET_CURRENT_USER',
+			userId: user._id
+		}
+
+		store.dispatch(action);
+
+		//if user doesn't have avatar, user the default avatar
+		if (!user.profile.avatar){
+			Meteor.users.update(user._id, {$set: {'profile.avatar': '/img/default-avatar.png'}});
+		}
+	})
+});

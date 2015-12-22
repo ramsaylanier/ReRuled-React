@@ -2,6 +2,28 @@ Rules = new Mongo.Collection('rules');
 Games = new Mongo.Collection('games');
 Rulesets = new Mongo.Collection('rulesets');
 
+searchableCollections = ['Games']
+
+if (Meteor.isServer){
+  Meteor.methods({
+    search: function(searchString, searchCollection){
+
+      check(searchString, String);
+      check(searchCollection, String);
+
+      if (searchCollection.indexOf(searchableCollections) === -1){
+        throw new Meteor.Error(422, 'This collection is not searchable');
+      }
+
+      collection = global[searchCollection];
+      if (!searchString || searchString.length <= 1){
+        return collection.find({_id: null})
+      } else {
+        return collection.find({ title: new RegExp(searchString)}).fetch();
+      }
+    }
+  })
+}
 
 Meteor.methods({
   createRule: function(rule, rulesetId){

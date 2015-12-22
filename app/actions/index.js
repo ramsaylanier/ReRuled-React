@@ -1,7 +1,14 @@
 import * as types from '../constants/actionTypes.js';
 
+export function setCurrentUser(userId) {
+  return {
+    type: types.SET_CURRENT_USER,
+    userId
+  }
+}
+
+
 export function updatePath(path, noRouterUpdate) {
-  console.log(path);
   return {
     type: types.UPDATE_PATH,
     path,

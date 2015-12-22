@@ -7,13 +7,20 @@ import autocompleteStyles from './autocomplete.scss'
 const AutocompleteField = React.createClass({
 
 	getInitialState(){
-		return {value: this.props.value}
+		return {
+			value: this.props.value,
+			items: []
+		}
 	},
 
 	handleChange(e){
 		this.setState({value: e.target.value});
     let searchString = $(e.currentTarget).val();
-		Session.set('searchString', searchString);
+		Meteor.call('search', searchString, this.props.searchCollection, (err, res) => {
+			if (res){
+				this.setState({items: res})
+			}
+		});
 	},
 
 	keyDown(e){
@@ -97,7 +104,7 @@ const AutocompleteField = React.createClass({
 	},
 
 	_showFoundItems(){
-    let items = this.props.items;
+    let items = this.state.items;
 		let onClick = this.props.itemClick;
 
     if (items.length > 0){
