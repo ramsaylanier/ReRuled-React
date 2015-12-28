@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 
 //components
 import { Page, PageContent } from '../Page/page.jsx';
-import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
-import GameActions from '../Games/_gameActions.jsx';
-import RulesList from '../Rules/_rulesList.jsx';
-import RulesetsList from '../Rules/_rulesetsList.jsx';
-import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
-import EditRulesetModal from '../Modal/_editRulesetModal.jsx';
 import Loading from '../Loading/loading.jsx';
 import { Alerts } from '../Alerts/alert.jsx';
 
@@ -32,14 +26,7 @@ const LandingPage = React.createClass({
 		this.props.actions.setCurrentGame(null);
 	},
 
-	componentDidUpdate(){
-		console.log('updated')
-	},
-
 	render(){
-
-
-		console.log('render');
 
 		if (this.data.loading){
 			return (

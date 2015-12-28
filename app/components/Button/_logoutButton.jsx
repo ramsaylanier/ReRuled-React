@@ -5,7 +5,6 @@ import Button from './button.jsx';
 const LogoutButton = (actions) => {
   const handleClick = () => {
     Meteor.logout( error => {
-      this.actions.setCurrentUser(null)
     });
   }
 

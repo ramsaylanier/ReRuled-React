@@ -22,8 +22,16 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel?stage=0',
+        loader: 'babel',
         exclude: /node_modules|lib/,
+        query: {
+            presets: ['react', 'es2015', 'stage-0'],
+            plugins: [
+              // https://github.com/babel/babel-loader#babel-is-injecting-helpers-into-each-file-and-bloating-my-code
+              'transform-runtime',
+              'transform-decorators-legacy'
+            ],
+        }
       },
       {
         test: /\.json?$/,

@@ -35,12 +35,12 @@ Meteor.startup(() => {
 		var user = Meteor.user();
 
 		//Set the currentUser in redux store
-		var action = {
-			type: 'SET_CURRENT_USER',
-			userId: user._id
-		}
-
-		store.dispatch(action);
+		// var action = {
+		// 	type: 'SET_CURRENT_USER',
+		// 	userId: user._id
+		// }
+    // 
+		// store.dispatch(action);
 
 		//if user doesn't have avatar, user the default avatar
 		if (!user.profile.avatar){

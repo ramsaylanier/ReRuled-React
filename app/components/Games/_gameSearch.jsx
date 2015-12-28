@@ -9,6 +9,13 @@ import { Alerts } from '../Alerts/alert.jsx';
 import { resetCounts } from '../../animations.js';
 
 const GameSearch = React.createClass({
+  mixins: [ReactMeteorData],
+
+  getMeteorData(){
+    return{
+      userId: Meteor.userId()
+    }
+  },
 
   componentDidMount(){
     this._animateSearchIn();
@@ -70,8 +77,7 @@ const GameSearch = React.createClass({
   },
 
   _showRecentGames(){
-    console.log(this.props);
-    let recentGames = Meteor.user().recentGames;
+    let recentGames = this.data.userId ? Meteor.user().recentGames : null;
 
     if (recentGames){
       return (

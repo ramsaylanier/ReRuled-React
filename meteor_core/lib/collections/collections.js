@@ -2,7 +2,7 @@ Rules = new Mongo.Collection('rules');
 Games = new Mongo.Collection('games');
 Rulesets = new Mongo.Collection('rulesets');
 
-searchableCollections = ['Games']
+var searchableCollections = ['Games']
 
 if (Meteor.isServer){
   Meteor.methods({
@@ -21,6 +21,10 @@ if (Meteor.isServer){
       } else {
         return collection.find({ title: new RegExp(searchString)}).fetch();
       }
+    },
+    updateUserAvatar: function(){
+      var user = Meteor.users.findOne(this.userId);
+      console.log(user);
     }
   })
 }

@@ -20,6 +20,7 @@ const Header = React.createClass({
 		if (prevProps.title !== this.props.title){
 				this._animateTitleIn();
 		}
+
 	},
 
 	render(){

@@ -1,11 +1,11 @@
 import * as types from '../constants/actionTypes.js';
 
-export function setCurrentUser(userId) {
-  return {
-    type: types.SET_CURRENT_USER,
-    userId
-  }
-}
+// export function setCurrentUser(userId) {
+//   return {
+//     type: types.SET_CURRENT_USER,
+//     userId
+//   }
+// }
 
 
 export function updatePath(path, noRouterUpdate) {

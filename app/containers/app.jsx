@@ -16,12 +16,14 @@ class App extends Component {
   }
 
   render() {
-    const { currentModal, currentGame, actions } = this.props
+    const { currentModal, currentGame, actions } = this.props;
+    const currentUser = Meteor.userId();
+
     let view = React.cloneElement(this.props.children, this.props);
 
     return (
       <div className="application">
-        <Header className="app-header" title={this.props.currentGame}></Header>
+        <Header className="app-header" title={currentGame} user={currentUser}></Header>
 
         <AlertsComponent/>
 
@@ -45,7 +47,6 @@ function mapStateToProps(state) {
   console.log('statez:', state);
   return {
     path: state.routing.path,
-    currentUser: state.users.currentUser,
     currentGame: state.games.currentGame,
     gameContent: state.games.gameContent,
     currentRule: state.rules.currentRule,

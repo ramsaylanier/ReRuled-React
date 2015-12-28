@@ -23,32 +23,27 @@ var config = module.exports = _.assign(_.clone(config), {
         loader: 'babel',
         exclude: /node_modules|lib/,
         query: {
-          stage: 0,
+          presets: ['react', 'es2015', 'stage-0'],
           cacheDirectory: true,
           plugins: [
-            'react-transform'
-          ],
-          extra: {
-            'react-transform': {
-              transforms: [{
-                transform: 'react-transform-hmr',
-                imports: ['react'],
+            // https://github.com/babel/babel-loader#babel-is-injecting-helpers-into-each-file-and-bloating-my-code
+            'transform-runtime',
+            'transform-decorators-legacy',
+            ['react-transform', {
+              'transforms': [{
+                'transform': 'react-transform-hmr',
+                'imports': ['react'],
                 // this is important for Webpack HMR:
-                locals: ['module']
-              },
-              {
-                transform: 'react-transform-catch-errors',
+                'locals': ['module']
+              }, {
+                'transform': 'react-transform-catch-errors',
                 // the second import is the React component to render error
                 // (it can be a local path too, like './src/ErrorReporter')
-                imports: ['react', 'redbox-react']
+                'imports': ['react', 'redbox-react']
               }]
-            }
-          },
+            }]
+          ]
         },
-      },
-      {
-        test: /\.cjsx$/,
-        loaders: ['coffee', 'cjsx']
       },
       {
         test: /\.json?$/,
