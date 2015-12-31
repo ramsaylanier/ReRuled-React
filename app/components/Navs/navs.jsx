@@ -2,58 +2,37 @@ import React from 'react';
 import { Link } from 'react-router';
 import styles from './navs.scss';
 
-const NavList = React.createClass({
-	render(){
-		let navItems = this.props.navItems;
-		let navClassName = styles[this.props.navType];
-		let className = styles.list;
+const NavList = (props) =>{
 
-		return (
-			<nav className={navClassName}>
-				<ul className={className}>
-					{navItems.map( item => {
-						return (
-							<NavItem key={item.name} {...item}/>
-						)
-					})}
-				</ul>
-			</nav>
-		)
-	}
-});
-
-const SubNavList = (props) => {
-	let navItems = props.navItems;
-	let className = styles.subnav__list;
+	let navClassName = styles[props.type];
 
 	return (
-		<ul className={className}>
-			{navItems.map((item) => {
-				return (
-					<NavItem key={item.name} {...item} subNavItem={true} />
-				)
-			})}
-		</ul>
+		<nav className={navClassName}>
+			<ul className={styles.list}>
+				{props.children}
+			</ul>
+		</nav>
 	)
-}
+};
 
 const NavItem = (props) =>{
-	let isSubNavItem = props.subNavItem;
-	let className = styles.item;
-	let linkClassName = styles.link;
 
-	return (
-		<li className={className} >
-			<Link to={props.url} className={linkClassName} href={props.url}  onClick={props.clickFunction}>
-				{props.icon? props.icon : props.name}
-			</Link>
-
-			{ props.subnav && <SubNavList {...props.subnav}/> }
-		</li>
-	)
+	if (props.type =="link"){
+		return (
+			<li className={styles.item}>
+				<Link to={props.href} className={styles.link} onClick={props.onClick}>{props.children}</Link>
+			</li>
+		)
+	} else {
+		return (
+			<li className={styles.item}>
+				{props.children}
+			</li>
+		)
+	}
 }
 
 let Navs = [];
 
 
-export { NavList, SubNavList, NavList, Navs}
+export { NavList, NavList, NavItem, Navs}

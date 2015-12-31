@@ -4,11 +4,10 @@ import { Provider } from 'react-redux';
 import { Router, History, Route, IndexRoute, Link } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import App from './containers/app.jsx';
-import configureStore from './store/store.js';
+import store from './store/store.js';
 import * as Page from './components/Page/Pages.js';
 import {syncReduxAndRouter } from 'redux-simple-router';
 
-let store = configureStore();
 const history = createBrowserHistory();
 
 syncReduxAndRouter(history, store);
@@ -18,8 +17,8 @@ render((
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Page.LandingPage} />
-        <Route path="/login" component={Page.LoginPage}/>
-        <Route path="/register" component={Page.RegisterPage}/>
+        <Route path="/login" component={Page.LoginPage} />
+        <Route path="/register" component={Page.RegisterPage} />
         <Route path="/dashboard" component={Page.DashboardPage}/>
         <Route path="/profile" component={Page.ProfilePage}/>
         <Route path="/games/:game" component={Page.GamePage}/>
@@ -33,14 +32,8 @@ render((
 Meteor.startup(() => {
 	Accounts.onLogin(function(){
 		var user = Meteor.user();
-
 		//Set the currentUser in redux store
-		// var action = {
-		// 	type: 'SET_CURRENT_USER',
-		// 	userId: user._id
-		// }
-    // 
-		// store.dispatch(action);
+		store.dispatch({type: 'SET_CURRENT_USER', userId: user._id});
 
 		//if user doesn't have avatar, user the default avatar
 		if (!user.profile.avatar){

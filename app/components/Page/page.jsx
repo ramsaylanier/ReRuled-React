@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import reactMixin from 'react-mixin';
+
+import store from '../../store/store.js';
 
 import Settings from '../../settings.js';
 import PageAnimations from './PageAnimations.js';
@@ -9,30 +9,33 @@ import { AnimateItem, resetCounts } from '../../animations.js'
 import styles from './page.scss';
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
 
+
 // Write your package code here!
 const Page = React.createClass({
 
 	componentDidMount(){
 		resetCounts();
-		CurrentPageRef = this.refs.page;
+
+		console.log('page store:', store.getState());
+
+		store.dispatch({type: 'SET_CURRENT_PAGEREF', pageRef: this._page });
 
 		if (Settings.AnimatePages){
-			var item = ReactDOM.findDOMNode(this.refs.page);
 			var animation = this.props.animation || PageAnimations.animateIn;
-			AnimateItem(item, PageAnimations.animateIn);
+			AnimateItem(this._page, PageAnimations.animateIn);
 		}
 	},
 
+	componentDidUpdate(prevProps){
+
+	},
+
 	render(){
-		let className = this.props.className || styles.base;
+		let className = this.props.className;
 		let children = this.props.children;
 
-		let bg = this.props.backgroundImage && {
-			backgroundImage: "url('" + this.props.backgroundImage + "')",
-		};
-
 		return(
-				<div ref="page" className={styles.base + ' ' + className} style={bg}>
+				<div ref={ (c) => this._page = c } className={styles.base + ' ' + className}>
 					{children}
 				</div>
 		)
@@ -134,4 +137,10 @@ const PageSeparator = React.createClass({
 	}
 });
 
-export { Page, PageHero, PageHeader, PageTitle, PageContent, PageSection, PageSeparator };
+const PageOverlay = () => {
+	return(
+		<div className={styles.overlay}></div>
+	)
+}
+
+export { Page, PageHero, PageHeader, PageTitle, PageContent, PageSection, PageSeparator, PageOverlay };

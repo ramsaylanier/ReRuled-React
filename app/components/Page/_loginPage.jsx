@@ -25,7 +25,7 @@ const LoginPage = React.createClass({
 						<Button type="twitter" action={twitterLogin}>{TwitterIcon} Login With Twitter</Button>
 						<p>No account? <Link to='/register' className="transition-link">Register</Link></p>
 
-						<Link className="small render-form" onClick={renderForgotPasswordForm}>Forgot password</Link>
+						<Link to="/" className="small render-form" onClick={renderForgotPasswordForm}>Forgot password</Link>
 					</div>
 				</PageContent>
 			</Page>

@@ -1,12 +1,11 @@
 import * as types from '../constants/actionTypes.js';
 
-// export function setCurrentUser(userId) {
-//   return {
-//     type: types.SET_CURRENT_USER,
-//     userId
-//   }
-// }
-
+export function setCurrentUser(userId) {
+  return {
+    type: types.SET_CURRENT_USER,
+    userId
+  }
+}
 
 export function updatePath(path, noRouterUpdate) {
   return {
@@ -49,6 +48,13 @@ export function setCurrentModal(modalName){
   return{
     type: types.SET_CURRENT_MODAL,
     modalName
+  }
+}
+
+export function setCurrentPageRef(pageRef){
+  return{
+    type: types.SET_CURRENT_PAGEREF,
+    pageRef
   }
 }
 

@@ -1,15 +1,16 @@
 @import '../../Stylesheets/vars';
 
-.base{
-
+.nav{
+  display: flex;
+  align-items: center;
 }
 
 .list{
-  height: 100%;
   display: flex;
+  height: 100%;
 }
 
-.subnav__list{
+.subnav{
   position: absolute;
 	top: $headerHeight;
 	right: 0;
@@ -20,9 +21,13 @@
 		transition: transform 0ms ease-out 0ms, opacity 150ms ease-out;
 	}
 
+  .list{
+    flex-wrap: wrap;
+  }
+
 	.item{
+    width: 100%;
 		background-color: $primary;
-		display: block;
 		padding: .5rem;
 
 		@for $i from 1 through 5{
@@ -34,6 +39,8 @@
 }
 
 .item{
+  align-items: center;
+  display: flex;
   position: relative;
 	padding: 0rem;
 }
@@ -42,13 +49,11 @@
   color: white;
 	display: block;
 	height: 100%;
-
-	display: flex;
 	align-items: center;
 }
 
-
 .primary{
+  composes: nav;
   height: 100%;
   align-self: flex-end;
 
@@ -56,30 +61,19 @@
     display: none;
   }
 
-  .list{
-    display: flex;
-
-		& > .item{
-			margin-right: .5rem;
-		}
-  }
-
   .item{
-    display: flex;
-		align-items: center;
 		&:hover{
 			opacity: 1;
 
-			.subnav__list{
+			.subnav{
 				transition: transform 0ms ease-out 0ms, opacity 300ms ease-out;
 				transform: rotateX(0deg);
 				opacity: 1;
-
 			}
 		}
   }
 
-  .subnav__list{
+  .subnav{
     transition: transform 0ms ease-out 300ms, opacity 150ms ease-out;
 		transform: rotateX(90deg);
 		opacity: 0;

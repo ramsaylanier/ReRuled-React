@@ -9,4 +9,4 @@ const Button = ({type, action, children}) => {
 		</button>
 	)
 }
-export default Button
+export default Button;

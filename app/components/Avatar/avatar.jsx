@@ -16,11 +16,13 @@ const Avatar = React.createClass({
 			})
 		})
 	},
-	render(){
 
+	render(){
 		let className = styles.base;
+
+		let image = Meteor.user() ? Meteor.user().profile.avatar : '';
 		return (
-			<img className={className} src={this.props.image} />
+			<img className={className} src={image} />
 		)
 	}
 });

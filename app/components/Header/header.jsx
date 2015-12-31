@@ -1,18 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { LogoIcon } from '../Icons/icons.jsx';
-import Navs from '../Navs/_navItems.jsx';
-import { NavList } from '../Navs/navs.jsx';
+import AppNav from '../Navs/_AppNav.jsx';
 import styles from './header.scss';
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
 
 const Header = React.createClass({
-	mixins: [ReactMeteorData],
 
-	getMeteorData(){
-		return{
-			loggingIn: Meteor.loggingIn(),
-			user: Meteor.userId()
+	componentDidMount(){
+		if (Meteor.user()){
+			this.props.actions.setCurrentUser(Meteor.user());
 		}
 	},
 
@@ -20,7 +17,6 @@ const Header = React.createClass({
 		if (prevProps.title !== this.props.title){
 				this._animateTitleIn();
 		}
-
 	},
 
 	render(){
@@ -34,13 +30,7 @@ const Header = React.createClass({
 					<Link to={logoLink} className={styles.brand}>{LogoIcon}</Link>
 					<span ref="title" className={styles.title}>{this.props.title}</span>
 
-					{!this.data.loggingIn &&
-						Navs.map( nav => {
-							if (nav.location == 'header'){
-								return <NavList key={nav.name} withUser={true} navItems={nav.navItems()} navType={nav.name}/>
-							}
-						})
-					}
+					<AppNav user={this.props.currentUser} actions={this.props.actions}/>
 
 					{this.props.children}
 				</div>

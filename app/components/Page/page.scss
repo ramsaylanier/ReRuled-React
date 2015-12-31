@@ -9,6 +9,10 @@
 	padding-top: $headerHeight;
 	opacity: 0;
 	transition: opacity 300ms ease-out;
+
+	&.with_overlay{
+		background-color: blue;
+	}
 }
 
 .content{

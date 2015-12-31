@@ -1,9 +1,9 @@
 let PageAnimations = {
 	defaults: {
-		duration: .1,
+		duration: .5,
 		properties: {
 			opacity: 1,
-			ease: Power2.easeOut
+			ease: Power4.easeOut
 		}
 	}
 }
