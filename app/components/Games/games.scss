@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+.title{
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: .5rem;
+}
+
 .search{
   position: relative;
   width: 100%;
@@ -68,7 +74,7 @@
 
 .actions{
   text-align: center;
-  padding-bottom: 2rem;
+  padding: 1rem 0rem;
   button{
     &:not(:last-of-type){
       margin-right: 1rem;

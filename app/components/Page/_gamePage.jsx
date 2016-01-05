@@ -21,7 +21,7 @@ const GamePage = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData(){
-		let currentGame = this.props.params.game;
+		let currentGame = this.props.currentGame;
 		let gameSub = Meteor.subscribe('currentGame', currentGame);
 		let rulesSub = Meteor.subscribe('rulesListByGameId', currentGame)
 		let rulesetsSub = Meteor.subscribe('rulesetsListByGameId', currentGame)
@@ -60,7 +60,6 @@ const GamePage = React.createClass({
   				<Page>
   					<PageContent>
   						<header className={gameStyles.header}>
-                  <h2>{game.title}</h2>
 
 									{currentUser ?
 	  								<GameActions {...this.props} /> :
@@ -81,8 +80,14 @@ const GamePage = React.createClass({
 	},
 
 	_showGamesContent(){
-		let content = FlowRouter.getQueryParam('content');
-		if (content === 'rulesets'){
+		let content = this.props.gameContent;
+
+		if (this.data.rulesetsLoading || this.data.rulesLoading) {
+			return (
+				<Loading/>
+			)
+		}
+		else if (content === 'rulesets'){
 			return(
 				<RulesetsList rulesets={this.data.rulesets} public={true} {...this.props}/>
 			)

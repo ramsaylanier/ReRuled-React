@@ -9,7 +9,6 @@ import { BookIcon, SetIcon } from '../Icons/icons.jsx';
 
 const GameFilters = React.createClass({
   _setContentToRules(){
-    // console.log(this.props);
     let ruleFilter = $(this.ruleFilter);
     let rulesetFilter = $(this.rulesetFilter);
 
@@ -32,20 +31,18 @@ const GameFilters = React.createClass({
   },
 
   componentDidMount(){
-
-    // console.log(this.props.actions);
-    // let contentQuery = this.props.location.query.content;
-    // if (contentQuery == undefined || contentQuery == 'rules' ){
-    //   this._setContentToRules();
-    // } else {
-    //   this._setContentToRulesets();
-    // }
+    console.log('mounted');
+    TweenMax.fromTo(this.filters, .5, {
+      opacity: 0
+    }, {
+      opacity: 1
+    })
   },
 
   render(){
 
     return(
-      <div className={styles.filters}>
+      <div ref={ (c) => this.filters = c } className={styles.filters}>
         <div className={styles.filter} ref={ (c)=> this.ruleFilter = c} >
           <span className={styles.filter_name}>Rules</span>
           <Button type="icon" action={this._setContentToRules}>{BookIcon}</Button>

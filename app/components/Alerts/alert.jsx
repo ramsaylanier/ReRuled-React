@@ -56,6 +56,7 @@ const Alert = React.createClass({
 	},
 
 	render(){
+		console.log('alert:', this.props);
 		let alert = this.props.alert;
     let className = styles[this.props.alert.type];
 		return(

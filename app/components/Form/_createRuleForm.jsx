@@ -47,7 +47,9 @@ const CreateRuleForm = React.createClass({
 
   _onSubmit(e){
     e.preventDefault();
-    let setCurrentModal = this.props.actions.setCurrentModal;
+
+    const {setCurrentModal, updatePath} = this.props.actions;
+    const {currentGame} = this.props;
 
     let rule = {
       name: $(e.target).find('[name="rule-name"]').val(),
@@ -75,6 +77,7 @@ const CreateRuleForm = React.createClass({
           animateModalOut();
           setTimeout( () => {
             setCurrentModal(null);
+            updatePath('/dashboard/' + currentGame);
           }, 500);
         }
       })

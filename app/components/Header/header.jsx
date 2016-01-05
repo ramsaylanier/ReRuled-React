@@ -5,19 +5,19 @@ import AppNav from '../Navs/_AppNav.jsx';
 import styles from './header.scss';
 import wrapperStyles from '../../Stylesheets/wrapper.scss';
 
-const Header = React.createClass({
+export default class Header extends React.Component{
 
 	componentDidMount(){
 		if (Meteor.user()){
 			this.props.actions.setCurrentUser(Meteor.user());
 		}
-	},
+	}
 
 	componentDidUpdate(prevProps){
 		if (prevProps.title !== this.props.title){
 				this._animateTitleIn();
 		}
-	},
+	}
 
 	render(){
 		let logoLink = '/';
@@ -36,7 +36,7 @@ const Header = React.createClass({
 				</div>
 			</header>
 		)
-	},
+	}
 
 	_animateTitleIn(){
 		let title = this.refs.title;
@@ -50,6 +50,4 @@ const Header = React.createClass({
 			ease: Power4.easeInOut
 		})
 	}
-});
-
-export default Header;
+}

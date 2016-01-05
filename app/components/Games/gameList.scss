@@ -1,0 +1,22 @@
+@import '../../Stylesheets/vars.scss';
+
+.base{
+  background-color: darken(white, 5%);
+  display: inline-block;
+  padding: .5rem;
+  margin-right: 1rem;
+
+  &:not(:last-of-type){
+    margin-bottom: 1rem;
+  }
+}
+
+.link{
+  padding: 1rem 0rem;
+  color: $primary;
+  text-decoration: underline;
+  cursor: pointer;
+  a{
+    color: $primary;
+  }
+}

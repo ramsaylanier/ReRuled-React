@@ -15,6 +15,12 @@ const Loading = React.createClass({
     let rotation = 0;
     let duration = .5;
 
+    TweenMax.fromTo(container, .2, {
+      opacity: 0
+    }, {
+      opacity: 1
+    })
+
     TweenMax.to(left, duration, {
       x: dX,
       y: dY,

@@ -21,19 +21,18 @@ Meteor.methods({
 				}
 			);
 
-			ServiceConfiguration.configurations.upsert(
-				{ service: "facebook" },
-					{
-					$set: {
-					  appId: Meteor.settings.facebook.appId,
-					  loginStyle: "popup",
-					  secret: Meteor.settings.facebook.appSecret
-					}
-				}
-			);
+			// ServiceConfiguration.configurations.upsert(
+			// 	{ service: "facebook" },
+			// 		{
+			// 		$set: {
+			// 		  appId: Meteor.settings.facebook.appId,
+			// 		  loginStyle: "popup",
+			// 		  secret: Meteor.settings.facebook.appSecret
+			// 		}
+			// 	}
+			// );
 		} catch(e) {
 			console.log("Error with account configuration")
-			console.log(e)
 		}
 	},
 

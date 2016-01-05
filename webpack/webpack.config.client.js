@@ -26,7 +26,6 @@ module.exports = {
        query: {
            presets: ['react' ,'es2015', 'stage-0'],
            plugins: [
-             // https://github.com/babel/babel-loader#babel-is-injecting-helpers-into-each-file-and-bloating-my-code
              'transform-runtime',
              'react-transform',
              'transform-decorators-legacy',

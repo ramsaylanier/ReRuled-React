@@ -26,7 +26,7 @@ var config = module.exports = _.assign(_.clone(config), {
           presets: ['react', 'es2015', 'stage-0'],
           cacheDirectory: true,
           plugins: [
-            // https://github.com/babel/babel-loader#babel-is-injecting-helpers-into-each-file-and-bloating-my-code
+            'transform-react-display-name',
             'transform-runtime',
             'transform-decorators-legacy',
             ['react-transform', {

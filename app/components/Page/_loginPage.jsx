@@ -22,7 +22,7 @@ const LoginPage = React.createClass({
 				<PageContent>
 					<div className={wrapperClassName}>
 						<LoginForm {...this.props}/>
-						<Button type="twitter" action={twitterLogin}>{TwitterIcon} Login With Twitter</Button>
+						<Button type="twitter" action={this._twitterLogin}>{TwitterIcon} Login With Twitter</Button>
 						<p>No account? <Link to='/register' className="transition-link">Register</Link></p>
 
 						<Link to="/" className="small render-form" onClick={renderForgotPasswordForm}>Forgot password</Link>
@@ -30,6 +30,20 @@ const LoginPage = React.createClass({
 				</PageContent>
 			</Page>
 		)
+	},
+
+	_twitterLogin(){
+		const loginStyle = 'popup';
+		const { updatePath } = this.props.actions;
+
+		Meteor.loginWithTwitter({loginStyle: loginStyle}, function(error, result){
+			if (error){
+				Alerts.throw(error.message, 'error');
+			}
+			else{
+				updatePath('/dashboard');
+			}
+		});
 	}
 });
 
@@ -44,21 +58,6 @@ let renderForgotPasswordForm = (e)=>{
 		</div>,
 		document.getElementById('forgot-password-form-wrapper')
 	);
-};
-
-
-let twitterLogin = ()=>{
-	var loginStyle = 'popup';
-	var device = Session.get('device');
-
-	Meteor.loginWithTwitter({loginStyle: loginStyle}, function(error, result){
-		if (error){
-			Alerts.throw(error, 'error');
-		}
-		else{
-			FlowRouter.go('/dashboard');
-		}
-	});
 };
 
 export default LoginPage;

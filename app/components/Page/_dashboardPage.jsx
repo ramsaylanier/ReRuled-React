@@ -6,6 +6,7 @@ import NotFoundPage from '../Page/_notFoundPage.jsx';
 import GameSearch from '../Games/_gameSearch.jsx';
 import GameActions from '../Games/_gameActions.jsx';
 import GameFilters from '../Games/_gameFilters.jsx';
+import UserGameList from '../Games/_userGameList.jsx';
 import RulesList from '../Rules/_rulesList.jsx';
 import RulesetsList from '../Rules/_rulesetsList.jsx';
 import AddToRulesetModal from '../Modal/_addToRulesetModal.jsx';
@@ -47,7 +48,8 @@ const DashboardPage = React.createClass({
 	},
 
 	componentDidMount(){
-
+		let currentGame = this.props.params.game;
+    this.props.actions.setCurrentGame(currentGame);
 	},
 
 	render(){
@@ -67,14 +69,17 @@ const DashboardPage = React.createClass({
 					<Page>
 						<PageContent>
 							<header className={gameStyles.header}>
-								<h3>My Rulebook</h3>
+								<h2 className={gameStyles.title}>My Rulebook</h2>
 
-								{currentGame &&
-								<GameActions {...this.props} />
-								}
 								{this._showGamesList()}
 
-								<GameFilters {...this.props} />
+								{currentGame &&
+									<GameActions {...this.props} />
+								}
+
+								{currentGame &&
+									<GameFilters {...this.props} />
+								}
 							</header>
 
 							<div className={gameStyles.main}>
@@ -94,22 +99,9 @@ const DashboardPage = React.createClass({
 
 		if (games){
 			return(
-				<ul>
-				{games.map( game => {
-					return(
-						<li className={gameStyles.inline_item}>
-							<a className={gameStyles.link} onClick={this._setCurrentGame}>{game}</a>
-						</li>
-					)
-				})}
-				</ul>
+				<UserGameList games={games} actions={this.props.actions} />
 			)
 		}
-	},
-
-	_setCurrentGame(e){
-		let gameName = $(e.currentTarget).text();
-		this.props.actions.setCurrentGame(gameName);
 	},
 
 	_showGamesContent(){

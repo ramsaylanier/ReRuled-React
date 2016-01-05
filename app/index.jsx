@@ -20,6 +20,7 @@ render((
         <Route path="/login" component={Page.LoginPage} />
         <Route path="/register" component={Page.RegisterPage} />
         <Route path="/dashboard" component={Page.DashboardPage}/>
+        <Route path="/dashboard/:game" component={Page.DashboardPage}/>
         <Route path="/profile" component={Page.ProfilePage}/>
         <Route path="/games/:game" component={Page.GamePage}/>
         <Route path="/rules/:rule" component={Page.RulePage}/>
@@ -40,4 +41,9 @@ Meteor.startup(() => {
 			Meteor.users.update(user._id, {$set: {'profile.avatar': '/img/default-avatar.png'}});
 		}
 	})
+
+  Meteor.call('serviceConfig', 'popup', function(error){
+		if (error)
+			Errors.throw(error.reason, 'error')
+	});
 });
